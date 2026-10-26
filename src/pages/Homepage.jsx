@@ -1,8 +1,36 @@
+import './Homepage.css'
+
 function Homepage() {
   return (
     <section className="homepage">
-      <h1>ROMA, DAJE!</h1>
-      <p>La città, te la porti appresso.</p>
+      <div className="homepage-content">
+        <p className="homepage-eyebrow">
+          FATTO A ROMA. PURE SE TE NE VAI.
+        </p>
+
+        <h1>
+          ROMA,
+          <br />
+          DAJE!
+        </h1>
+
+        <p className="homepage-description">
+          La città, te la porti appresso.
+          <br />
+          Pure quando te manca er raccordo.
+        </p>
+
+        <a href="#prodotto" className="homepage-cta">
+          SCOPRI ER SAMPIETRINO
+          <span aria-hidden="true"> ↗</span>
+        </a>
+      </div>
+
+      <div className="homepage-product">
+        <span className="product-placeholder">
+          ER SAMPIETRINO
+        </span>
+      </div>
     </section>
   )
 }

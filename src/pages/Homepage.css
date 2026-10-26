@@ -1,0 +1,82 @@
+.homepage {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  align-items: center;
+  gap: 48px;
+  min-height: 650px;
+  padding: 80px 8%;
+}
+
+.homepage-content {
+  max-width: 560px;
+}
+
+.homepage-eyebrow {
+  margin-bottom: 24px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.homepage h1 {
+  margin: 0 0 28px;
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.09em;
+}
+
+.homepage-description {
+  margin-bottom: 32px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.homepage-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.homepage-cta:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.homepage-product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  padding: 24px;
+  background-color: #eae4d9;
+}
+
+.product-placeholder {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .homepage {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    min-height: auto;
+    padding: 64px 6%;
+  }
+
+  .homepage-product {
+    min-height: 300px;
+  }
+}
