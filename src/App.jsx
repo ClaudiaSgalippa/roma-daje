@@ -1,11 +1,14 @@
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import DefaultLayout from './layout/DefaultLayout'
+import Homepage from './pages/Homepage'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<h1>ROMA, DAJE</h1>} />
+        <Route element={<DefaultLayout />}>
+          <Route path="/" element={<Homepage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
