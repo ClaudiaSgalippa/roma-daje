@@ -5,7 +5,7 @@ function MyNavbar() {
   return (
     <header className="navbar">
       <Link to="/" className="navbar-logo">
-        ROMA, DAJE!
+        Roma, daje.
       </Link>
 
       <nav>

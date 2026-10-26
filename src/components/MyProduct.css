@@ -1,0 +1,145 @@
+.product-showcase {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  align-items: center;
+  gap: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 6%;
+}
+
+/* Area dell'immagine */
+.product-image-container {
+  display: flex;
+  align-items: center;
+  background-color: #eae4d9;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  transition: opacity 0.2s ease;
+}
+
+/* Informazioni sul prodotto */
+.product-info {
+  max-width: 460px;
+}
+
+.product-location {
+  margin-bottom: 16px;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.product-info h2 {
+  margin-bottom: 20px;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
+.product-description {
+  max-width: 400px;
+  margin-bottom: 28px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.product-price {
+  margin-bottom: 32px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.variant-label {
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Pulsanti per scegliere la variante */
+.variant-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.variant-button {
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.variant-button:hover {
+  border-color: var(--color-text);
+}
+
+.variant-button.active {
+  border-color: var(--color-text);
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+.variant-button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.product-note {
+  margin-top: 28px;
+  color: #716d65;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Adattamento per tablet e smartphone */
+@media (max-width: 750px) {
+  .product-showcase {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 64px 6%;
+  }
+
+  .product-image-container {
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .product-image {
+    max-width: 380px;
+  }
+
+  .product-info {
+    max-width: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .product-showcase {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+
+  .variant-options {
+    gap: 8px;
+  }
+
+  .variant-button {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+}
