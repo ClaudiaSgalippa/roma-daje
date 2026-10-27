@@ -9,8 +9,8 @@ function MyNavbar() {
       </Link>
 
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/prodotto">Er sampietrino</Link>
+        <Link to="/">HOME</Link>
+        <Link to="/prodotto">ER SAMPIETRINO</Link>
       </nav>
     </header>
   )
