@@ -9,9 +9,17 @@
 }
 
 .navbar-logo {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  transition: color 0.2s ease;
+}
+
+.navbar-logo:hover {
+  color: #d8896f;
 }
 
 .navbar nav {
@@ -36,11 +44,15 @@
     gap: 16px;
   }
 
+  .navbar-logo {
+    font-size: 1.2rem;
+  }
+
   .navbar nav {
     gap: 14px;
   }
 
   .navbar nav a {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }

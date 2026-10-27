@@ -4,7 +4,7 @@ export const sampietrinoVariants = [
     name: 'Er Classico',
     location: 'ROMA, SENZA FRONZOLI',
     description:
-      'Il Classico che non passa mai di moda. Essenziale, autentico, orgogliosamente romano.',
+      'Essenziale, autentico, orgogliosamente romano.',
     image: '/images/er-classico.jpg',
   },
   {

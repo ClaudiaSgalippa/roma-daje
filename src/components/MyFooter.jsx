@@ -6,7 +6,7 @@ function MyFooter() {
       <div className="footer-main">
         <div className="footer-brand">
           <a href="#" className="footer-logo">
-            ROMA, DAJE.
+            Roma, daje.
           </a>
 
           <p>La città, te la porti appresso.</p>

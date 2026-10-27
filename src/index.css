@@ -1,6 +1,6 @@
 /* Identità visiva globale */
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'DM Sans', sans-serif;
   color: #252421;
   background-color: #f8f6f1;
 
@@ -46,4 +46,8 @@ img {
 
 h1, h2, h3, p {
   margin-top: 0;
+}
+
+h1, h2, h3, .navbar nav a, .homepage-cta, .add-to-cart-button {
+  font-family: 'Montserrat', sans-serif;
 }
