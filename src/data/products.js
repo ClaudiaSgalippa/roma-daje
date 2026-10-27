@@ -5,7 +5,7 @@ export const sampietrinoVariants = [
     location: 'ROMA, SENZA FRONZOLI',
     description:
       'Scuro, compatto e leggermente lucido. La versione originale, senza aggiunte.',
-    image: '/images/er-classico.png',
+    image: '/images/er-classico.jpg',
   },
   {
     id: 'magna',
@@ -13,7 +13,7 @@ export const sampietrinoVariants = [
     location: 'TRASTEVERE',
     description:
       'Una piccola macchia rossastra, ricordo delle serate finite a magnà.',
-    image: '/images/er-magna.png',
+    image: '/images/er-magna.jpg',
   },
   {
     id: 'verde',
@@ -21,7 +21,7 @@ export const sampietrinoVariants = [
     location: 'GARBATELLA',
     description:
       'Un tocco di verde tra le fessure, per chi ama la Roma più nascosta.',
-    image: '/images/er-verde.png',
+    image: '/images/er-verde.jpg',
   },
   {
     id: 'vissuto',
@@ -29,6 +29,6 @@ export const sampietrinoVariants = [
     location: 'CENTRO',
     description:
       'Un sottile segno sulla superficie: qualche storia in più da raccontare.',
-    image: '/images/er-vissuto.png',
+    image: '/images/er-vissuto.jpg',
   },
 ]
