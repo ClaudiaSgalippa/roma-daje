@@ -10,7 +10,7 @@ function MyNavbar() {
 
       <nav>
         <Link to="/">Home</Link>
-        <a href="#prodotto">Er sampietrino</a>
+        <Link to="/prodotto">Er sampietrino</Link>
       </nav>
     </header>
   )

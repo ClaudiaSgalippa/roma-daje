@@ -32,7 +32,7 @@ function MyProduct() {
           {selectedVariant.description}
         </p>
 
-        <p className="product-price">€ 19,90</p>
+        <p className="product-price">€ 59,90</p>
 
         <p className="variant-label">
           Scegli la tua versione

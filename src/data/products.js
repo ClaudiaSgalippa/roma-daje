@@ -4,12 +4,12 @@ export const sampietrinoVariants = [
     name: 'Er Classico',
     location: 'ROMA, SENZA FRONZOLI',
     description:
-      'Scuro, compatto e leggermente lucido. La versione originale, senza aggiunte.',
+      'Il Classico che non passa mai di moda. Essenziale, autentico, orgogliosamente romano.',
     image: '/images/er-classico.jpg',
   },
   {
     id: 'magna',
-    name: 'Er magnà',
+    name: 'Er Magna',
     location: 'TRASTEVERE',
     description:
       'Una piccola macchia rossastra, ricordo delle serate finite a magnà.',
@@ -17,7 +17,7 @@ export const sampietrinoVariants = [
   },
   {
     id: 'verde',
-    name: 'Er verde',
+    name: 'Er Verde',
     location: 'GARBATELLA',
     description:
       'Un tocco di verde tra le fessure, per chi ama la Roma più nascosta.',
@@ -25,7 +25,7 @@ export const sampietrinoVariants = [
   },
   {
     id: 'vissuto',
-    name: 'Er vissuto',
+    name: 'Er Vissuto',
     location: 'CENTRO',
     description:
       'Un sottile segno sulla superficie: qualche storia in più da raccontare.',
