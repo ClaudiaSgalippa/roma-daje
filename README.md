@@ -37,6 +37,7 @@ Carrello con gestione delle quantità e del totale
 Contatore degli articoli nel carrello
 Layout responsive per desktop e dispositivi mobili
 Sezione newsletter
+
 👩‍💻 Autrice
 Claudia Sgalippa — Junior Web Developer
 
