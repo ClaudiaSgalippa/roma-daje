@@ -1,5 +1,6 @@
 import './Homepage.css'
 import MyProduct from '../components/MyProduct'
+import MyReviews from "../components/MyReviews";
 
 function Homepage() {
   return (
@@ -35,8 +36,8 @@ function Homepage() {
         </div>
       </section>
       <MyProduct />
+      <MyReviews />
     </>
-    
   )
 }
 

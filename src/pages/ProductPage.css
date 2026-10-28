@@ -433,7 +433,7 @@
 
 /* FAQ - Domande frequenti */
 .product-faq {
-  max-width: 850px;
+  max-width: 1200px;
   margin: 80px auto 24px;
   padding-top: 48px;
   border-top: 1px solid var(--color-border);
