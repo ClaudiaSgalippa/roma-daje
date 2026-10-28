@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import './CartPage.css'
 
+const FREE_SHIPPING_THRESHOLD = 99
+const SHIPPING_COST = 4.9
+
 function CartPage() {
   const {
     cartItems,
@@ -10,6 +13,18 @@ function CartPage() {
     removeFromCart,
   } = useCart()
 
+  const hasFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD
+
+  const shippingCost =
+    hasFreeShipping || cartItems.length === 0 ? 0 : SHIPPING_COST
+
+  const finalTotal = cartTotal + shippingCost
+
+  const amountToFreeShipping = Math.max(
+    0,
+    FREE_SHIPPING_THRESHOLD - cartTotal,
+  )
+
   return (
     <main className="cart-page">
       <h1>IL TUO CARRELLO</h1>
@@ -17,12 +32,13 @@ function CartPage() {
       {cartItems.length === 0 ? (
         <div className="cart-empty">
           <p>Qua non c'è ancora niente, daje 'n po!</p>
+
           <Link to="/prodotto" className="cart-continue">
             Vai a scoprire Er Sampietrino
           </Link>
         </div>
       ) : (
-        <>
+        <div className="cart-layout">
           <div className="cart-items">
             {cartItems.map((item) => (
               <article className="cart-item" key={item.id}>
@@ -83,7 +99,35 @@ function CartPage() {
             ))}
           </div>
 
-          <div className="cart-summary">
+          <aside className="cart-summary">
+            {hasFreeShipping ? (
+              <p className="cart-benefit-message">
+                <span>
+                  Daje! Hai sbloccato
+                </span>
+
+                <strong>
+                  Spedizione gratuita
+                </strong>
+
+                <span>
+                  e la borraccia-nasone in omaggio!
+                </span>
+              </p>
+            ) : (
+              <p className="cart-benefit-message">
+                <span>Ti mancano</span>
+
+                <strong className="cart-missing-amount">
+                  {amountToFreeShipping.toFixed(2).replace('.', ',')} €
+                </strong>
+
+                <span>
+                  per la spedizione gratuita e la borraccia-nasone in omaggio.
+                </span>
+              </p>
+            )}
+
             <p>
               <span>Subtotale</span>
               <strong>
@@ -91,8 +135,20 @@ function CartPage() {
               </strong>
             </p>
 
-            <p className="cart-summary-note">
-              Spedizione esclusa, per ora.
+            <p>
+              <span>Spedizione</span>
+              <strong>
+                {shippingCost === 0
+                  ? 'Gratis'
+                  : `${shippingCost.toFixed(2).replace('.', ',')} €`}
+              </strong>
+            </p>
+
+            <p className="cart-summary-total">
+              <span>Totale</span>
+              <strong>
+                {finalTotal.toFixed(2).replace('.', ',')} €
+              </strong>
             </p>
 
             <button
@@ -106,8 +162,8 @@ function CartPage() {
             <Link to="/prodotto" className="cart-continue">
               Continua gli acquisti
             </Link>
-          </div>
-        </>
+          </aside>
+        </div>
       )}
     </main>
   )

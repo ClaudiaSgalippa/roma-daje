@@ -17,9 +17,18 @@
   margin-bottom: 20px;
 }
 
+/* Layout del carrello */
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  align-items: start;
+  gap: 40px;
+}
+
 .cart-items {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .cart-item {
@@ -80,28 +89,59 @@
   white-space: nowrap;
 }
 
+/* Riepilogo */
 .cart-summary {
-  width: min(100%, 360px);
-  margin: 28px 0 0 auto;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-border);
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
 }
 
-.cart-summary > p:first-child {
+.cart-summary > p {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 16px;
-  font-size: 1rem;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
 }
 
-.cart-summary-note {
-  margin: 10px 0 20px;
-  font-size: 0.8rem;
-  color: #666;
+.cart-summary > p strong {
+  white-space: nowrap;
+}
+
+.cart-summary .cart-benefit-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.cart-missing-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cart-summary .cart-summary-total {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .cart-summary .add-to-cart-button {
   width: 100%;
+  white-space: normal;
 }
 
 .cart-summary .add-to-cart-button:disabled {
@@ -121,23 +161,32 @@
 }
 
 /* Tablet */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 24px;
+  }
+
   .cart-item {
-    grid-template-columns: 100px minmax(0, 1fr);
+    grid-template-columns: 90px minmax(0, 1fr);
     gap: 14px;
   }
 
   .cart-item img {
-    width: 100px;
+    width: 90px;
   }
 
   .cart-item-subtotal {
     grid-column: 2;
   }
+
+  .cart-summary {
+    padding: 16px;
+  }
 }
 
 /* Smartphone */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .cart-page {
     width: 92%;
     padding: 28px 0;
@@ -146,6 +195,11 @@
   .cart-page > h1 {
     font-size: 1.35rem;
     margin-bottom: 20px;
+  }
+
+  .cart-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 
   .cart-item {
@@ -184,17 +238,20 @@
   }
 
   .cart-summary {
-    width: 100%;
-    margin-top: 20px;
-    padding-top: 16px;
+    padding: 16px;
   }
 
-  .cart-summary > p:first-child {
-    font-size: 0.95rem;
+  .cart-summary > p {
+    font-size: 0.9rem;
   }
 
-  .cart-summary-note {
-    margin-bottom: 16px;
+  .cart-summary .cart-benefit-message {
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .cart-missing-amount {
+    font-size: 1.4rem;
   }
 
   .cart-continue {
