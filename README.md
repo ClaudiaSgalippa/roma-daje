@@ -1,44 +1,46 @@
-Roma, daje.
-Un piccolo progetto e-commerce ispirato a Roma, alla sua ironia e a quelle piccole cose che la rendono inconfondibile.
+# Roma, daje.
 
-Roma, daje. è una pagina prodotto realizzata con React, pensata per unire un'identità visiva riconoscibile a un'esperienza di navigazione semplice e intuitiva.
+Un piccolo progetto e-commerce ispirato a Roma, alla sua ironia e a quelle piccole cose che la rendono inconfondibile. 🍅
 
-🏛️ Il progetto
-Il protagonista è Er Sampietrino, un prodotto immaginario che celebra uno dei simboli più caratteristici delle strade romane.
+**Roma, daje.** è un progetto realizzato con React, nato per sperimentare la creazione di una pagina prodotto con un'identità visiva riconoscibile e un'esperienza di navigazione semplice e intuitiva.
 
-Il progetto nasce come esercizio pratico di sviluppo web, con particolare attenzione alla presentazione del prodotto, alla navigazione e all'esperienza utente.
+## 🏛️ Il progetto
 
-🛠️ Tecnologie utilizzate
-React
-JavaScript
-Vite
-React Router
-CSS
-Lucide React
-🚀 Avviare il progetto in locale
-Assicurati di avere Node.js e npm installati.
+Il protagonista è **Er Sampietrino**, un prodotto immaginario che celebra uno dei simboli più caratteristici delle strade romane.
 
-Clona il repository.
+L'obiettivo è unire un concept ironico a un'interfaccia moderna, curando la presentazione del prodotto, la navigazione e l'esperienza utente su desktop e dispositivi mobili.
 
-Apri la cartella del progetto nel terminale.
+## 🛠️ Tecnologie
 
-Installa le dipendenze:
+- React
+- JavaScript
+- Vite
+- React Router
+- CSS
+- Lucide React
 
+## ✨ Funzionalità
+
+- Homepage e pagina prodotto
+- Navigazione tra le pagine
+- Carrello con gestione delle quantità e del totale
+- Contatore degli articoli nel carrello
+- Layout responsive
+- Sezione newsletter
+
+## 🚀 Avvio in locale
+
+Prerequisiti: Node.js e npm.
+
+```bash
 npm install
-Avvia il server di sviluppo:
-
 npm run dev
-Apri nel browser l'indirizzo mostrato dal terminale.
+```
 
-📱 Funzionalità
-Homepage e pagina prodotto
-Navigazione tra le pagine
-Carrello con gestione delle quantità e del totale
-Contatore degli articoli nel carrello
-Layout responsive per desktop e dispositivi mobili
-Sezione newsletter
+Apri nel browser l'indirizzo locale indicato da Vite.
 
-👩‍💻 Autrice
-Claudia Sgalippa — Junior Web Developer
+## 👩‍💻 Autrice
+
+**Claudia Sgalippa** — Junior Web Developer
 
 Progetto realizzato per mettere in pratica le competenze di sviluppo web e sperimentare soluzioni per un'interfaccia responsive, curando sia l'aspetto visivo sia le funzionalità.
