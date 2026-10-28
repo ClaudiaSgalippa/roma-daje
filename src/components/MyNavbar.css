@@ -56,3 +56,15 @@
     font-size: 0.7rem;
   }
 }
+
+.navbar-cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar-cart-count {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+}

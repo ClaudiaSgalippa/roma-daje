@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { sampietrinoVariants } from '../data/products'
+import { useCart } from '../context/CartContext'
 import './ProductPage.css'
 
 function ProductPage() {
@@ -9,9 +10,15 @@ function ProductPage() {
 
   const [quantity, setQuantity] = useState(1)
 
+  const { addToCart } = useCart()
+
   function handleAddToCart() {
-    alert(
-      `${quantity} x ${selectedVariant.name} aggiunto al carrello!`,
+    addToCart(
+      {
+        ...selectedVariant,
+        price: 59.9,
+      },
+      quantity,
     )
   }
 
@@ -92,7 +99,8 @@ function ProductPage() {
               className="add-to-cart-button"
               onClick={handleAddToCart}
             >
-              Aggiungi al carrello · {(59.90 * quantity).toFixed(2).replace('.', ',')} €
+              Aggiungi al carrello ·{' '}
+              {(59.9 * quantity).toFixed(2).replace('.', ',')} €
             </button>
           </div>
 
