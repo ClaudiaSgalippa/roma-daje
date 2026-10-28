@@ -53,7 +53,6 @@
 }
 
 /* Immagine del prodotto */
-
 .homepage-product {
   width: 100%;
   max-width: 420px;
@@ -81,7 +80,6 @@
 }
 
 /* Tablet */
-
 @media (max-width: 700px) {
   .homepage {
     grid-template-columns: minmax(0, 1fr);
@@ -130,7 +128,6 @@
 }
 
 /* Smartphone */
-
 @media (max-width: 380px) {
   .homepage {
     gap: 24px;

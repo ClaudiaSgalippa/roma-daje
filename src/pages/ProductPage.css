@@ -13,7 +13,6 @@
 }
 
 /* Area dell'immagine */
-
 .product-detail-image {
   display: flex;
   align-items: center;
@@ -36,7 +35,6 @@
 }
 
 /* Informazioni sul prodotto */
-
 .product-detail-info {
   min-width: 0;
 }
@@ -78,7 +76,6 @@
 }
 
 /* Pulsanti per scegliere la variante */
-
 .product-detail-variants {
   display: flex;
   flex-wrap: wrap;
@@ -105,7 +102,6 @@
 }
 
 /* Pulsanti per quantità e carrello */
-
 .product-detail-actions {
   display: flex;
   flex-wrap: wrap;
@@ -157,7 +153,6 @@
 }
 
 /* Scheda tecnica */
-
 .product-specs {
   max-width: 1200px;
   margin: 100px auto 24px;
@@ -239,7 +234,6 @@
 }
 
 /* Tablet */
-
 @media (max-width: 900px) {
   .product-specs {
     margin-top: 72px;
@@ -251,7 +245,6 @@
 }
 
 /* Smartphone */
-
 @media (max-width: 750px) {
   .product-page {
     padding: 32px 5%;
@@ -335,7 +328,6 @@
 }
 
 /* Adattamento dei pulsanti smartphone */
-
 @media (max-width: 420px) {
   .product-page {
     padding: 24px 4%;
@@ -367,7 +359,6 @@
 }
 
 /* Piccoli accorgimenti per l'immagine */
-
 @media (min-width: 751px) and (max-width: 1100px) {
   .product-detail-image {
     width: 100%;
@@ -389,7 +380,6 @@
 }
 
 /* Scheda tecnica su smartphone */
-
 @media (max-width: 600px) {
   .product-specs {
     margin-top: 56px;
@@ -438,5 +428,117 @@
 
   .product-specs-disclaimer {
     font-size: 0.7rem;
+  }
+}
+
+/* FAQ - Domande frequenti */
+.product-faq {
+  max-width: 850px;
+  margin: 80px auto 24px;
+  padding-top: 48px;
+  border-top: 1px solid var(--color-border);
+}
+
+.product-faq-heading {
+  margin-bottom: 28px;
+}
+
+.product-faq-heading h2 {
+  margin-bottom: 12px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.product-faq-heading > p:last-child {
+  color: #716d65;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.product-faq-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.product-faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.product-faq-item h3 {
+  margin: 0;
+}
+
+.product-faq-question {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.product-faq-question:hover {
+  color: var(--color-accent);
+}
+
+.product-faq-question:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.faq-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.product-faq-answer {
+  padding: 0 36px 22px 4px;
+}
+
+.product-faq-answer p {
+  margin: 0;
+  color: #716d65;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* FAQ su smartphone */
+@media (max-width: 600px) {
+  .product-faq {
+    margin-top: 56px;
+    padding-top: 32px;
+  }
+
+  .product-faq-heading {
+    margin-bottom: 20px;
+  }
+
+  .product-faq-question {
+    gap: 12px;
+    padding: 18px 2px;
+    font-size: 0.9rem;
+  }
+
+  .product-faq-answer {
+    padding: 0 28px 18px 2px;
+  }
+
+  .product-faq-answer p {
+    font-size: 0.85rem;
+    line-height: 1.6;
   }
 }

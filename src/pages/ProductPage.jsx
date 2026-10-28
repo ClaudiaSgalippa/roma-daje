@@ -1,8 +1,31 @@
 import { useState } from 'react'
-import { Mountain, Landmark, Ruler, House } from 'lucide-react'
+import { Mountain, Landmark, Ruler, House, ChevronDown} from 'lucide-react'
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
+
+const faqItems = [
+  {
+    question: "Ma è davvero un sampietrino romano?",
+    answer:
+      "È Er Sampietrino: un omaggio in pietra naturale a uno dei simboli più riconoscibili de Roma. Bello da vedere, senza dover rifare la strada.",
+  },
+  {
+    question: 'Come scelgo la mia versione?',
+    answer:
+      'Facile: scegli la zona di Roma che preferisci tra quelle disponibili e aggiungila al carrello. Ogni versione ha la sua personalità!',
+  },
+  {
+    question: 'Quanto costa la spedizione?',
+    answer:
+      'La spedizione costa 4,90 €. Se il tuo carrello raggiunge 99 €, la spedizione è gratuita.',
+  },
+  {
+    question: 'Quando arriva la borraccia-nasone in omaggio?',
+    answer:
+      'La borraccia-nasone è prevista in omaggio con ordini da almeno 99 €. Un modo per portarsi un altro pezzo di Roma sempre appresso!',
+  },
+]
 
 function ProductPage() {
   const [selectedVariant, setSelectedVariant] = useState(
@@ -10,6 +33,7 @@ function ProductPage() {
   )
 
   const [quantity, setQuantity] = useState(1)
+  const [openFaq, setOpenFaq] = useState(null)
 
   const { addToCart } = useCart()
 
@@ -21,6 +45,10 @@ function ProductPage() {
       },
       quantity,
     )
+  }
+
+  function toggleFaq(index) {
+    setOpenFaq((current) => (current === index ? null : index))
   }
 
   return (
@@ -115,8 +143,12 @@ function ProductPage() {
       {/* Scheda tecnica */}
       <section className="product-specs">
         <div className="product-specs-heading">
-          <p className="product-detail-eyebrow">LA CARTA D'IDENTITÀ</p>
+          <p className="product-detail-eyebrow">
+            LA CARTA D'IDENTITÀ
+          </p>
+
           <h2>I dettagli, daje.</h2>
+
           <p>
             Tutto quello che c'è da sapere sul tuo nuovo coinquilino.
           </p>
@@ -124,32 +156,97 @@ function ProductPage() {
 
         <div className="product-specs-grid">
           <article className="product-spec-card">
-            <Mountain className="product-spec-icon" aria-hidden="true" />
+            <Mountain
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">MATERIALE</p>
             <h3>Pietra naturale</h3>
             <p>Leucitite</p>
           </article>
 
           <article className="product-spec-card">
-            <Landmark className="product-spec-icon" aria-hidden="true" />
+            <Landmark
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">TIPOLOGIA</p>
             <h3>Sampietrino romano</h3>
             <p>Un classico de Roma.</p>
           </article>
 
           <article className="product-spec-card">
-            <Ruler className="product-spec-icon" aria-hidden="true" />
+            <Ruler
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">DIMENSIONI</p>
             <h3>12 × 12 × 6 cm</h3>
             <p>Piccolo fuori, romano dentro.</p>
           </article>
 
           <article className="product-spec-card">
-            <House className="product-spec-icon" aria-hidden="true" />
+            <House
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">UTILIZZO</p>
             <h3>Oggetto decorativo</h3>
             <p>Fa scena, mica lavori stradali.</p>
           </article>
+        </div>
+      </section>
+
+      {/* Domande frequenti */}
+      <section className="product-faq">
+        <div className="product-faq-heading">
+          <p className="product-detail-eyebrow">
+            TE LO SPIAMO NOI
+          </p>
+
+          <h2>Domande? Daje.</h2>
+
+          <p>
+            Tutto quello che volevi sapere su Er Sampietrino.
+          </p>
+        </div>
+
+        <div className="product-faq-list">
+          {faqItems.map((item, index) => {
+            const isOpen = openFaq === index
+            const answerId = `faq-answer-${index}`
+
+            return (
+              <article className="product-faq-item" key={item.question}>
+                <h3>
+                  <button
+                    type="button"
+                    className="product-faq-question"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={answerId}
+                  >
+                    <span>{item.question}</span>
+
+                    <ChevronDown
+                      className={isOpen ? 'faq-chevron is-open' : 'faq-chevron'}
+                      size={20}
+                      aria-hidden="true"
+                    />
+                  </button>
+                </h3>
+
+                {isOpen && (
+                  <div
+                    className="product-faq-answer"
+                    id={answerId}
+                  >
+                    <p>{item.answer}</p>
+                  </div>
+                )}
+              </article>
+            )
+          })}
         </div>
       </section>
     </main>
