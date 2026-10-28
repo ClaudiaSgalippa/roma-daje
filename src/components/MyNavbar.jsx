@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ShoppingCart } from 'lucide-react'
+import { House, ShoppingCart } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import './MyNavbar.css'
 
@@ -13,13 +13,17 @@ function MyNavbar() {
       </Link>
 
       <nav>
-        <Link to="/">HOME</Link>
+        <Link to="/" aria-label="Home" title="Home">
+          <House size={21} strokeWidth={1.8} />
+        </Link>
+
         <Link to="/prodotto">ER SAMPIETRINO</Link>
 
         <Link
           to="/carrello"
           className="navbar-cart"
           aria-label={`Carrello, ${cartCount} articoli`}
+          title="Carrello"
         >
           <ShoppingCart size={21} strokeWidth={1.8} />
           <span className="navbar-cart-count">{cartCount}</span>

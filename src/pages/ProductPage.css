@@ -13,6 +13,7 @@
 }
 
 /* Area dell'immagine */
+
 .product-detail-image {
   display: flex;
   align-items: center;
@@ -35,6 +36,7 @@
 }
 
 /* Informazioni sul prodotto */
+
 .product-detail-info {
   min-width: 0;
 }
@@ -76,6 +78,7 @@
 }
 
 /* Pulsanti per scegliere la variante */
+
 .product-detail-variants {
   display: flex;
   flex-wrap: wrap;
@@ -102,6 +105,7 @@
 }
 
 /* Pulsanti per quantità e carrello */
+
 .product-detail-actions {
   display: flex;
   flex-wrap: wrap;
@@ -152,21 +156,23 @@
   line-height: 1.6;
 }
 
-/* Adattamento per tablet e smartphone */
+/* Tablet & Smartphone*/
+
 @media (max-width: 750px) {
   .product-page {
-    padding: 40px 6%;
+    padding: 32px 5%;
   }
 
   .product-detail {
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
-    gap: 32px;
+    gap: 24px;
   }
 
   .product-detail-image {
-    width: 460px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 380px;
+    padding: 12px;
   }
 
   .product-detail-info {
@@ -174,10 +180,82 @@
     max-width: 460px;
     padding-top: 0;
   }
+
+  .product-detail-eyebrow {
+    margin-bottom: 10px;
+    font-size: 0.68rem;
+  }
+
+  .product-detail-info h1 {
+    margin-bottom: 14px;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
+  .product-detail-description {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .product-detail-price {
+    margin-bottom: 22px;
+    font-size: 1.4rem;
+  }
+
+  .product-detail-label {
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+  }
+
+  .product-detail-variants {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .detail-variant {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .product-detail-actions {
+    gap: 10px;
+  }
+
+  .quantity-selector button {
+    width: 40px;
+    height: 44px;
+  }
+
+  .add-to-cart-button {
+    min-height: 44px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .product-detail-note {
+    margin-top: 18px;
+    font-size: 0.8rem;
+  }
 }
 
-/* Adattamento dei pulsanti su schermi piccoli */
+/* Adattamento dei pulsanti smartphone */
+
 @media (max-width: 420px) {
+  .product-page {
+    padding: 24px 4%;
+  }
+
+  .product-detail {
+    gap: 20px;
+  }
+
+  .product-detail-image {
+    max-width: 100%;
+    padding: 8px;
+  }
+
   .product-detail-actions {
     flex-direction: column;
     align-items: stretch;
@@ -190,11 +268,12 @@
   .add-to-cart-button {
     flex: none;
     width: 100%;
-    white-space: nowrap;
+    white-space: normal;
   }
 }
 
 /* Piccoli accorgimenti per l'immagine */
+
 @media (min-width: 751px) and (max-width: 1100px) {
   .product-detail-image {
     width: 100%;
