@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Mountain, Landmark, Ruler, House } from 'lucide-react'
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
@@ -24,6 +25,7 @@ function ProductPage() {
 
   return (
     <main className="product-page">
+      {/* Dettagli principali del prodotto */}
       <section className="product-detail">
         <div className="product-detail-image">
           <img
@@ -107,6 +109,47 @@ function ProductPage() {
           <p className="product-detail-note">
             Un piccolo pezzo di Roma, da portare sempre con te.
           </p>
+        </div>
+      </section>
+
+      {/* Scheda tecnica */}
+      <section className="product-specs">
+        <div className="product-specs-heading">
+          <p className="product-detail-eyebrow">LA CARTA D'IDENTITÀ</p>
+          <h2>I dettagli, daje.</h2>
+          <p>
+            Tutto quello che c'è da sapere sul tuo nuovo coinquilino.
+          </p>
+        </div>
+
+        <div className="product-specs-grid">
+          <article className="product-spec-card">
+            <Mountain className="product-spec-icon" aria-hidden="true" />
+            <p className="product-spec-label">MATERIALE</p>
+            <h3>Pietra naturale</h3>
+            <p>Leucitite</p>
+          </article>
+
+          <article className="product-spec-card">
+            <Landmark className="product-spec-icon" aria-hidden="true" />
+            <p className="product-spec-label">TIPOLOGIA</p>
+            <h3>Sampietrino romano</h3>
+            <p>Un classico de Roma.</p>
+          </article>
+
+          <article className="product-spec-card">
+            <Ruler className="product-spec-icon" aria-hidden="true" />
+            <p className="product-spec-label">DIMENSIONI</p>
+            <h3>12 × 12 × 6 cm</h3>
+            <p>Piccolo fuori, romano dentro.</p>
+          </article>
+
+          <article className="product-spec-card">
+            <House className="product-spec-icon" aria-hidden="true" />
+            <p className="product-spec-label">UTILIZZO</p>
+            <h3>Oggetto decorativo</h3>
+            <p>Fa scena, mica lavori stradali.</p>
+          </article>
         </div>
       </section>
     </main>

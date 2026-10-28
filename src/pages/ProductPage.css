@@ -156,7 +156,101 @@
   line-height: 1.6;
 }
 
-/* Tablet & Smartphone*/
+/* Scheda tecnica */
+
+.product-specs {
+  max-width: 1200px;
+  margin: 100px auto 24px;
+  padding-top: 48px;
+  border-top: 1px solid var(--color-border);
+}
+
+.product-specs-heading {
+  margin-bottom: 32px;
+}
+
+.product-specs-heading h2 {
+  margin-bottom: 12px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.product-specs-heading > p:last-child {
+  color: #716d65;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.product-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.product-spec-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  min-height: 190px;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  background-color: #eae4d9;
+  border: 1px solid #c9c0b2;
+  border-radius: 8px;
+}
+
+.product-spec-icon {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.6;
+}
+
+.product-spec-label {
+  margin: 4px 0 0;
+  color: #71685c;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.product-spec-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.product-spec-card > p:last-child {
+  margin: 0;
+  color: #716d65;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.product-specs-disclaimer {
+  margin-top: 16px;
+  color: #716d65;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .product-specs {
+    margin-top: 72px;
+  }
+
+  .product-specs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Smartphone */
 
 @media (max-width: 750px) {
   .product-page {
@@ -291,5 +385,58 @@
     max-height: 100%;
     aspect-ratio: 1 / 1;
     object-fit: contain;
+  }
+}
+
+/* Scheda tecnica su smartphone */
+
+@media (max-width: 600px) {
+  .product-specs {
+    margin-top: 56px;
+    padding-top: 32px;
+  }
+
+  .product-specs-heading {
+    margin-bottom: 24px;
+  }
+
+  .product-specs-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .product-spec-card {
+    min-width: 0;
+    min-height: 155px;
+    padding: 14px 12px;
+    gap: 8px;
+    border: 1px solid #c9c0b2;
+    border-radius: 8px;
+  }
+
+  .product-spec-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .product-spec-label {
+    margin-top: 2px;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .product-spec-card h3 {
+    font-size: 0.9rem;
+    line-height: 1.25;
+    overflow-wrap: break-word;
+  }
+
+  .product-spec-card > p:last-child {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .product-specs-disclaimer {
+    font-size: 0.7rem;
   }
 }

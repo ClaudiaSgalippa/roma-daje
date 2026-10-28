@@ -16,7 +16,7 @@ function CartPage() {
 
       {cartItems.length === 0 ? (
         <div className="cart-empty">
-          <p>Qua non c'è ancora niente, daje!</p>
+          <p>Qua non c'è ancora niente, daje 'n po!</p>
           <Link to="/prodotto" className="cart-continue">
             Vai a scoprire Er Sampietrino
           </Link>
