@@ -1,16 +1,43 @@
-# React + Vite
+Roma, daje.
+Un piccolo progetto e-commerce ispirato a Roma, alla sua ironia e a quelle piccole cose che la rendono inconfondibile.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Roma, daje. è una pagina prodotto realizzata con React, pensata per unire un'identità visiva riconoscibile a un'esperienza di navigazione semplice e intuitiva.
 
-Currently, two official plugins are available:
+🏛️ Il progetto
+Il protagonista è Er Sampietrino, un prodotto immaginario che celebra uno dei simboli più caratteristici delle strade romane.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Il progetto nasce come esercizio pratico di sviluppo web, con particolare attenzione alla presentazione del prodotto, alla navigazione e all'esperienza utente.
 
-## React Compiler
+🛠️ Tecnologie utilizzate
+React
+JavaScript
+Vite
+React Router
+CSS
+Lucide React
+🚀 Avviare il progetto in locale
+Assicurati di avere Node.js e npm installati.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Clona il repository.
 
-## Expanding the ESLint configuration
+Apri la cartella del progetto nel terminale.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Installa le dipendenze:
+
+npm install
+Avvia il server di sviluppo:
+
+npm run dev
+Apri nel browser l'indirizzo mostrato dal terminale.
+
+📱 Funzionalità
+Homepage e pagina prodotto
+Navigazione tra le pagine
+Carrello con gestione delle quantità e del totale
+Contatore degli articoli nel carrello
+Layout responsive per desktop e dispositivi mobili
+Sezione newsletter
+👩‍💻 Autrice
+Claudia Sgalippa — Junior Web Developer
+
+Progetto realizzato per mettere in pratica le competenze di sviluppo web e sperimentare soluzioni per un'interfaccia responsive, curando sia l'aspetto visivo sia le funzionalità.
