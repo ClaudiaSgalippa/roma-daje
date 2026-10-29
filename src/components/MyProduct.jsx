@@ -70,7 +70,7 @@ function MyProduct() {
               <h3>Spedizione</h3>
               <p>
                 La spedizione costa 4,90 €. Sopra i 99 € te la
-                offriamo noi, con la barraccia-nasone in omaggio!
+                offriamo noi, con la borraccia-nasone in omaggio!
               </p>
             </div>
           </div>

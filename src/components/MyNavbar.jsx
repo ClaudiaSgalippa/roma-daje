@@ -12,7 +12,7 @@ function MyNavbar() {
         <p>
           <strong>SPEDIZIONE GRATUITA</strong>
           <span className="promo-separator"> · </span>
-          <strong>BARRACCIA-NASONE IN OMAGGIO</strong>
+          <strong>BORRACCIA-NASONE IN OMAGGIO</strong>
         </p>
         <p className="promo-banner-subtitle">
           Per ordini superiori a 99 € · Daje, approfittane!

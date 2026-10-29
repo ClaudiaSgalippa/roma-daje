@@ -144,9 +144,9 @@ function getBotReply(message) {
     text.includes('regalo') ||
     text.includes('omaggio') ||
     text.includes('nasone') ||
-    text.includes('barraccia')
+    text.includes('borraccia')
   ) {
-    return 'Da 99€ di ordine ricevi in regalo la nostra barraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
+    return 'Da 99€ di ordine ricevi in regalo la nostra borraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
   }
 
   // Prezzo

@@ -80,7 +80,7 @@
   transform: translateY(100px);
 }
 
-/* Omaggio: barraccia-nasone */
+/* Omaggio: borraccia-nasone */
 .gift-section {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
@@ -91,7 +91,7 @@
   border-bottom: 1px solid var(--color-border);
 }
 
-/* Cornice della barraccia */
+/* Cornice della borraccia */
 .gift-image {
   width: 100%;
   max-width: 420px;

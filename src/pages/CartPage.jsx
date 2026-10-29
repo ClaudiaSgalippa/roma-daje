@@ -108,14 +108,14 @@ function CartPage() {
                   <strong>Spedizione gratuita</strong>
 
                   <span>
-                    e la barraccia-nasone in omaggio!
+                    e la borraccia-nasone in omaggio!
                   </span>
                 </p>
 
                 <div className="cart-gift-image">
                   <img
-                    src="/images/barraccia-nasone.png"
-                    alt="Barraccia-nasone in omaggio"
+                    src="/images/borraccia-nasone.png"
+                    alt="Borraccia-nasone in omaggio"
                     loading="lazy"
                   />
                 </div>
@@ -129,7 +129,7 @@ function CartPage() {
                 </strong>
 
                 <span>
-                  per la spedizione gratuita e la barraccia-nasone in omaggio.
+                  per la spedizione gratuita e la borraccia-nasone in omaggio.
                 </span>
               </p>
             )}

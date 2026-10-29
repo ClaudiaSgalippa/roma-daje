@@ -22,9 +22,9 @@ const faqItems = [
       'La spedizione costa 4,90 € ed è gratuita per ordini da 99 €. La consegna è prevista indicativamente entro 2–5 giorni lavorativi dalla spedizione. Daje, manca poco!',
   },
   {
-    question: 'Quando arriva la barraccia-nasone in omaggio?',
+    question: 'Quando arriva la borraccia-nasone in omaggio?',
     answer:
-      'La barraccia-nasone è in omaggio con ordini da almeno 99 €. Un altro pezzo di Roma da portarsi sempre appresso!',
+      'La borraccia-nasone è in omaggio con ordini da almeno 99 €. Un altro pezzo di Roma da portarsi sempre appresso!',
   },
   {
     question: 'Posso restituire il prodotto?',

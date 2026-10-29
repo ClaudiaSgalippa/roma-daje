@@ -44,8 +44,8 @@ function Homepage() {
       >
         <div className="gift-image">
           <img
-            src="/images/barraccia-nasone.png"
-            alt="La barraccia-nasone, omaggio di Roma, daje."
+            src="/images/borraccia-nasone.png"
+            alt="La borraccia-nasone, omaggio di Roma, daje."
             loading="lazy"
           />
         </div>
@@ -61,7 +61,7 @@ function Homepage() {
 
           <p className="gift-description">
             Te porti a casa un pezzo de Roma e noi ce mettemo pure da beve.
-            La barraccia-nasone è in omaggio con ordini superiori a 99 €.
+            La borraccia-nasone è in omaggio con ordini superiori a 99 €.
           </p>
 
           <p className="gift-note">
