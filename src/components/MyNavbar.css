@@ -1,3 +1,49 @@
+/* Banner promozionale */
+.promo-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 5%;
+  background-color: #292722;
+  color: #f8f6f1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.promo-banner p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.promo-banner > p:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 4px;
+  font-size: 0.75rem;
+}
+
+.promo-banner strong {
+  font-weight: 800;
+  letter-spacing: 0.035em;
+}
+
+.promo-separator {
+  flex-shrink: 0;
+}
+
+.promo-banner-subtitle {
+  opacity: 0.85;
+  font-size: 0.72rem !important;
+  white-space: nowrap;
+}
+
+/* Navbar */
 .navbar {
   display: flex;
   align-items: center;
@@ -86,6 +132,27 @@
 }
 
 /* Smartphone */
+@media (max-width: 600px) {
+  .promo-banner {
+    padding: 9px 3%;
+    gap: 3px;
+  }
+
+  .promo-banner > p:first-child {
+    font-size: clamp(0.48rem, 2.2vw, 0.68rem);
+    gap: 2px;
+  }
+
+  .promo-banner strong {
+    letter-spacing: 0.015em;
+  }
+
+  .promo-banner-subtitle {
+    font-size: clamp(0.55rem, 2.5vw, 0.68rem) !important;
+  }
+}
+
+/* Smartphone piccolo */
 @media (max-width: 380px) {
   .navbar {
     gap: 8px;

@@ -101,19 +101,25 @@ function CartPage() {
 
           <aside className="cart-summary">
             {hasFreeShipping ? (
-              <p className="cart-benefit-message">
-                <span>
-                  Daje! Hai sbloccato
-                </span>
+              <div className="cart-benefit-unlocked">
+                <p className="cart-benefit-message">
+                  <span>Daje! Hai sbloccato</span>
 
-                <strong>
-                  Spedizione gratuita
-                </strong>
+                  <strong>Spedizione gratuita</strong>
 
-                <span>
-                  e la borraccia-nasone in omaggio!
-                </span>
-              </p>
+                  <span>
+                    e la barraccia-nasone in omaggio!
+                  </span>
+                </p>
+
+                <div className="cart-gift-image">
+                  <img
+                    src="/images/barraccia-nasone.png"
+                    alt="Barraccia-nasone in omaggio"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             ) : (
               <p className="cart-benefit-message">
                 <span>Ti mancano</span>
@@ -123,7 +129,7 @@ function CartPage() {
                 </strong>
 
                 <span>
-                  per la spedizione gratuita e la borraccia-nasone in omaggio.
+                  per la spedizione gratuita e la barraccia-nasone in omaggio.
                 </span>
               </p>
             )}
