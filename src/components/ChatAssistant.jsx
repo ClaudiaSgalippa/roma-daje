@@ -1,0 +1,407 @@
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
+import { MessageCircle, X, Send, Bot, RotateCcw, Minus } from 'lucide-react'
+import './ChatAssistant.css'
+
+const STORAGE_KEY = 'roma-daje-chat'
+
+const suggestedQuestions = [
+  'Che versioni esistono?',
+  'Quanto costa Er Sampietrino?',
+  'Quanto costa la spedizione?',
+  'Come funziona il regalo?',
+  'Parlami di Er Sampietrino',
+]
+
+const welcomeMessage =
+  'Aò, benvenutə! 👋 So’ Er Bot de Roma, daje. Che te serve? Vedemo de risolve.'
+
+// Recupera la conversazione salvata nel browser
+function loadChat() {
+  const initialState = {
+    isOpen: false,
+    isMinimized: false,
+    message: '',
+    messages: [
+      {
+        id: 1,
+        sender: 'bot',
+        text: welcomeMessage,
+      },
+    ],
+  }
+
+  try {
+    const savedChat = localStorage.getItem(STORAGE_KEY)
+
+    if (!savedChat) return initialState
+
+    const parsedChat = JSON.parse(savedChat)
+
+    // Controlla che i dati salvati siano utilizzabili
+    if (
+      !Array.isArray(parsedChat.messages) ||
+      parsedChat.messages.length === 0 ||
+      !parsedChat.messages.every(
+        (item) =>
+          item &&
+          (item.sender === 'bot' || item.sender === 'user') &&
+          typeof item.text === 'string'
+      )
+    ) {
+      return initialState
+    }
+
+    return {
+      isOpen: parsedChat.isOpen === true,
+      isMinimized: parsedChat.isMinimized === true,
+      message:
+        typeof parsedChat.message === 'string'
+          ? parsedChat.message
+          : '',
+      messages: parsedChat.messages,
+    }
+  } catch {
+    return initialState
+  }
+}
+
+function getBotReply(message) {
+  const text = message.toLowerCase().trim()
+
+  // Tutte le versioni disponibili
+  if (
+    text.includes('version') ||
+    text.includes('varianti') ||
+    text.includes('modelli') ||
+    text.includes('quali sampietrini') ||
+    text.includes('che sampietrini')
+  ) {
+    return 'Aò, ce stanno quattro versioni de Er Sampietrino! 😎\n\nEr Classico — Roma, senza fronzoli. Essenziale e autentico.\n\nEr Magna — Trastevere. Una piccola macchia rossastra, ricordo delle serate finite a magnà.\n\nEr Verde — Garbatella. Un tocco de verde tra le fessure.\n\nEr Vissuto — Centro. Un sottile segno sulla superficie, perché ogni storia lascia er segno.\n\nQuale te rappresenta de più?'
+  }
+
+  // Zone e identità delle versioni
+  if (
+    text.includes('quartier') ||
+    text.includes('zone') ||
+    text.includes('dove si trovano') ||
+    text.includes('dove si trova') ||
+    text.includes('dove sono') ||
+    text.includes('luoghi') ||
+    text.includes('località')
+  ) {
+    return 'Ogni versione c’ha la sua identità romana! 📍\n\nEr Classico — ROMA, SENZA FRONZOLI: non è legato a una zona specifica.\n\nEr Magna — Trastevere: ispirato alle serate finite a magnà.\n\nEr Verde — Garbatella: dedicato alla Roma più nascosta e piena de verde.\n\nEr Vissuto — Centro di Roma: porta con sé i segni e le storie della città.\n\nTre riferimenti a zone della città e un classico che rappresenta Roma in generale!'
+  }
+
+  // Er Classico
+  if (text.includes('classico')) {
+    return 'Er Classico è la versione essenziale, autentica e orgogliosamente romana. La sua identità? ROMA, SENZA FRONZOLI. Poche chiacchiere, tanta romanità. ✨'
+  }
+
+  // Er Magna
+  if (text.includes('magna') || text.includes('trastevere')) {
+    return 'Er Magna è ispirato a Trastevere! Una piccola macchia rossastra, ricordo delle serate finite a magnà. Perché a Roma, prima o poi, se finisce sempre a tavola. 🍷'
+  }
+
+  // Er Verde
+  if (text.includes('verde') || text.includes('garbatella')) {
+    return 'Er Verde è ispirato alla Garbatella 🌿. Un tocco de verde tra le fessure, dedicato a chi ama la Roma più nascosta.'
+  }
+
+  // Er Vissuto
+  if (
+    text.includes('vissuto') ||
+    text.includes('centro storico')
+  ) {
+    return 'Er Vissuto è ispirato al Centro di Roma. C’ha un sottile segno sulla superficie: qualche storia in più da raccontà, senza perde er fascino. 🏛️'
+  }
+
+  // Spedizione
+  if (
+    text.includes('spedizion') ||
+    text.includes('consegna') ||
+    text.includes('trasporto')
+  ) {
+    return 'La spedizione costa 4,90 €. Ma se arrivi a 99 € di ordine, è gratis! Aò, almeno questa è una cosa che funziona a Roma 😎'
+  }
+
+  // Regalo
+  if (
+    text.includes('regalo') ||
+    text.includes('omaggio') ||
+    text.includes('nasone') ||
+    text.includes('barraccia')
+  ) {
+    return 'Da 99 € di ordine ricevi in regalo la nostra barraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
+  }
+
+  // Prezzo
+  if (
+    text.includes('prezzo') ||
+    text.includes('costa') ||
+    text.includes('quanto')
+  ) {
+    return 'Er Sampietrino costa 59,90 €. Un piccolo pezzo de Roma, senza doverlo raccattare per strada. 😉'
+  }
+
+  // Informazioni generali sul prodotto
+  if (
+    text.includes('prodotto') ||
+    text.includes('sampietrino') ||
+    text.includes('oggetto')
+  ) {
+    return 'Er Sampietrino è il nostro omaggio ironico a Roma: un prodotto per chi se porta un po’ de città pure a casa. Ce stanno quattro versioni, ognuna con la sua identità romana: Er Classico, Er Magna, Er Verde ed Er Vissuto!'
+  }
+
+  // Saluti
+  if (
+    text.includes('ciao') ||
+    text.includes('salve') ||
+    text.includes('buongiorno') ||
+    text.includes('buonasera')
+  ) {
+    return 'Aò, ciao! 👋 Benvenutə su Roma, daje. Che te serve?'
+  }
+
+  // Ringraziamenti
+  if (text.includes('grazie')) {
+    return 'Ma figurate! ❤️ Semo qua apposta. Daje!'
+  }
+
+  return 'Aò, questa ancora me manca! 😅 Prova a chiedermi delle versioni, delle zone di Roma, del prezzo, della spedizione o del regalo.'
+}
+
+function ChatAssistant() {
+  // Inizializza lo stato recuperando i dati salvati
+  const [initialChat] = useState(loadChat)
+
+  const [isOpen, setIsOpen] = useState(initialChat.isOpen)
+  const [isMinimized, setIsMinimized] = useState(
+    initialChat.isMinimized
+  )
+  const [message, setMessage] = useState(initialChat.message)
+  const [messages, setMessages] = useState(initialChat.messages)
+
+  // Riferimento diretto all'area dei messaggi
+  const chatMessagesRef = useRef(null)
+
+  // Salva automaticamente lo stato aggiornato della chat
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          isOpen,
+          isMinimized,
+          message,
+          messages,
+        })
+      )
+    } catch {
+      // La chat continua a funzionare anche se il salvataggio non è disponibile
+    }
+  }, [isOpen, isMinimized, message, messages])
+
+  // Scorre automaticamente fino all'ultimo messaggio, anche dopo F5
+  useLayoutEffect(() => {
+    if (isOpen && !isMinimized) {
+      requestAnimationFrame(() => {
+        const container = chatMessagesRef.current
+
+        if (container) {
+          container.scrollTop = container.scrollHeight
+        }
+      })
+    }
+  }, [messages, isOpen, isMinimized])
+
+  // Invia la domanda subito e mostra la risposta dopo una breve pausa
+  function sendMessage(textToSend = message) {
+    const text = textToSend.trim()
+
+    if (!text) return
+
+    const userMessage = {
+      id: Date.now(),
+      sender: 'user',
+      text,
+    }
+
+    setMessages((previous) => [
+      ...previous,
+      userMessage,
+    ])
+
+    setMessage('')
+
+    // Simula una breve pausa prima della risposta del bot
+    setTimeout(() => {
+      const botMessage = {
+        id: Date.now(),
+        sender: 'bot',
+        text: getBotReply(text),
+      }
+
+      setMessages((previous) => [
+        ...previous,
+        botMessage,
+      ])
+    }, 900)
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    sendMessage()
+  }
+
+  // Azzera i messaggi e ripristina il messaggio iniziale
+  function resetChat() {
+    setMessages([
+      {
+        id: 1,
+        sender: 'bot',
+        text: welcomeMessage,
+      },
+    ])
+
+    setMessage('')
+    setIsMinimized(false)
+  }
+
+  // Chiude la chat e azzera la conversazione
+  function closeChat() {
+    resetChat()
+    setIsOpen(false)
+  }
+
+  return (
+    <div className="chat-assistant">
+      {isOpen && !isMinimized && (
+        <section
+          className="chat-window"
+          aria-label="Chat con Er Bot de Roma"
+        >
+          <header className="chat-header">
+            <div className="chat-avatar">
+              <Bot size={24} />
+            </div>
+
+            <div className="chat-header-info">
+              <h2>Er Bot de Roma</h2>
+              <span>
+                <span className="chat-status-dot" />
+                L'assistente de Roma, daje.
+              </span>
+            </div>
+
+            <button
+              className="chat-close"
+              type="button"
+              onClick={resetChat}
+              aria-label="Ricomincia la chat"
+              title="Ricomincia la chat"
+            >
+              <RotateCcw size={19} />
+            </button>
+
+            <button
+              className="chat-close"
+              type="button"
+              onClick={() => setIsMinimized(true)}
+              aria-label="Riduci la chat"
+              title="Riduci la chat"
+            >
+              <Minus size={21} />
+            </button>
+          </header>
+
+          <div
+            className="chat-messages"
+            aria-live="polite"
+            ref={chatMessagesRef}
+          >
+            {messages.map((item) => (
+              <div
+                key={item.id}
+                className={`chat-message chat-message--${item.sender}`}
+              >
+                {item.text}
+              </div>
+            ))}
+          </div>
+
+          {messages.length === 1 && (
+            <div className="chat-suggestions">
+              <p>CHIEDIME PURE</p>
+
+              {suggestedQuestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  onClick={() => sendMessage(question)}
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <form className="chat-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              placeholder="Scrivi un messaggio..."
+              aria-label="Scrivi un messaggio"
+              maxLength={500}
+            />
+
+            <button
+              type="submit"
+              disabled={!message.trim()}
+              aria-label="Invia messaggio"
+            >
+              <Send size={18} />
+            </button>
+          </form>
+
+          <p className="chat-disclaimer">
+            Assistente dimostrativo · Risposte automatiche
+          </p>
+        </section>
+      )}
+
+      <button
+        type="button"
+        className={`chat-launcher ${
+          isOpen && !isMinimized
+            ? 'chat-launcher--open'
+            : ''
+        }`}
+        onClick={() => {
+          if (isOpen && !isMinimized) {
+            closeChat()
+          } else if (isMinimized) {
+            setIsMinimized(false)
+          } else {
+            setIsOpen(true)
+            setIsMinimized(false)
+          }
+        }}
+        aria-label={
+          isOpen && !isMinimized
+            ? 'Chiudi e resetta la chat'
+            : 'Apri la chat'
+        }
+        aria-expanded={isOpen && !isMinimized}
+      >
+        {isOpen && !isMinimized ? (
+          <X size={25} />
+        ) : (
+          <MessageCircle size={25} />
+        )}
+      </button>
+    </div>
+  )
+}
+
+export default ChatAssistant

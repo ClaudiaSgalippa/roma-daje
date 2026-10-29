@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import MyNavbar from '../components/MyNavbar'
 import MyFooter from '../components/MyFooter'
+import ChatAssistant from '../components/ChatAssistant'
 
 function DefaultLayout() {
   return (
@@ -10,6 +11,7 @@ function DefaultLayout() {
         <Outlet />
       </main>
       <MyFooter />
+      <ChatAssistant />
     </>
   )
 }
