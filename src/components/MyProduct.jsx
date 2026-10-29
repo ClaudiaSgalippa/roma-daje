@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { sampietrinoVariants } from '../data/products'
+import { Truck, PackageCheck, ShieldCheck } from 'lucide-react'
 import './MyProduct.css'
 
 function MyProduct() {
-  // Memorizza la variante selezionata.
-  // All'inizio mostra la prima: Er Classico.
+  // All'inizio mostra la prima variante: Er Classico.
   const [selectedVariant, setSelectedVariant] = useState(
     sampietrinoVariants[0],
   )
@@ -38,7 +38,7 @@ function MyProduct() {
           Scegli la tua versione
         </p>
 
-        {/* Un pulsante per ogni variante */}
+        {/* Pulsanti per scegliere la variante */}
         <div className="variant-options">
           {sampietrinoVariants.map((variant) => (
             <button
@@ -58,6 +58,51 @@ function MyProduct() {
         <p className="product-note">
           Quattro versioni, una sola città.
         </p>
+
+        {/* Informazioni su spedizione, resi e garanzia */}
+        <div className="product-policies">
+          <div className="product-policy">
+            <span className="product-policy-icon" aria-hidden="true">
+              <Truck size={22} strokeWidth={1.7} />
+            </span>
+
+            <div>
+              <h3>Spedizione</h3>
+              <p>
+                La spedizione costa 4,90 €. Sopra i 99 € te la
+                offriamo noi, con la barraccia-nasone in omaggio!
+              </p>
+            </div>
+          </div>
+
+          <div className="product-policy">
+            <span className="product-policy-icon" aria-hidden="true">
+              <PackageCheck size={22} strokeWidth={1.7} />
+            </span>
+
+            <div>
+              <h3>Reso gratuito entro 30 giorni</h3>
+              <p>
+                Hai cambiato idea? Tranquillo, capita pure
+                ai migliori.
+              </p>
+            </div>
+          </div>
+
+          <div className="product-policy">
+            <span className="product-policy-icon" aria-hidden="true">
+              <ShieldCheck size={22} strokeWidth={1.7} />
+            </span>
+
+            <div>
+              <h3>Garanzia di 2 anni</h3>
+              <p>
+                Er sampietrino è tosto. Ma se qualcosa non va,
+                ci siamo.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

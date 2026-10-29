@@ -516,6 +516,10 @@
   line-height: 1.7;
 }
 
+#faq {
+  scroll-margin-top: 100px;
+}
+
 /* FAQ su smartphone */
 @media (max-width: 600px) {
   .product-faq {
@@ -540,5 +544,92 @@
   .product-faq-answer p {
     font-size: 0.85rem;
     line-height: 1.6;
+  }
+}
+
+
+/* Informazioni su spedizione, resi e garanzia */
+.product-purchase-info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 24px;
+  padding: 18px 8px;
+  background-color: #eae4d9;
+  border: 1px solid #c9c0b2;
+  border-radius: 8px;
+}
+
+.purchase-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 4px 10px;
+  text-align: center;
+}
+
+/* Barre divisorie */
+.purchase-info-item + .purchase-info-item {
+  border-left: 1px solid #c9c0b2;
+}
+
+.purchase-info-item > div {
+  width: 100%;
+  min-width: 0;
+}
+
+.purchase-info-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.7;
+}
+
+.purchase-info-item h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.purchase-info-item p {
+  margin: 0;
+  color: #716d65;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Nasconde il dettaglio dei tempi in questo riquadro */
+.purchase-info-item:first-child p + p {
+  display: none;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+  .product-purchase-info {
+    margin-top: 24px;
+    padding: 14px 4px;
+  }
+
+  .purchase-info-item {
+    gap: 7px;
+    padding: 4px 6px;
+  }
+
+  .purchase-info-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .purchase-info-item h3 {
+    font-size: 0.78rem;
+  }
+
+  .purchase-info-item p {
+    font-size: 0.7rem;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
 }

@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { Mountain, Landmark, Ruler, House, ChevronDown} from 'lucide-react'
+import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck } from 'lucide-react'
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
 
 const faqItems = [
   {
-    question: "Ma è davvero un sampietrino romano?",
+    question: 'Ma è davvero un sampietrino romano?',
     answer:
-      "È Er Sampietrino: un omaggio in pietra naturale a uno dei simboli più riconoscibili de Roma. Bello da vedere, senza dover rifare la strada.",
+      'È Er Sampietrino: un omaggio in pietra naturale a uno dei simboli più riconoscibili de Roma. Bello da vedere, senza dover rifare la strada.',
   },
   {
     question: 'Come scelgo la mia versione?',
@@ -18,12 +18,27 @@ const faqItems = [
   {
     question: 'Quanto costa la spedizione?',
     answer:
-      'La spedizione costa 4,90 €. Se il tuo carrello raggiunge 99 €, la spedizione è gratuita.',
+      'La spedizione costa 4,90 € ed è gratuita per ordini da 99 €. La consegna è prevista indicativamente entro 2–5 giorni lavorativi dalla spedizione. Daje, manca poco!',
   },
   {
-    question: 'Quando arriva la borraccia-nasone in omaggio?',
+    question: 'Quando arriva la barraccia-nasone in omaggio?',
     answer:
-      'La borraccia-nasone è prevista in omaggio con ordini da almeno 99 €. Un modo per portarsi un altro pezzo di Roma sempre appresso!',
+      'La barraccia-nasone è in omaggio con ordini da almeno 99 €. Un altro pezzo di Roma da portarsi sempre appresso!',
+  },
+  {
+    question: 'Posso restituire il prodotto?',
+    answer:
+      'Certo! Puoi richiedere il reso entro 30 giorni dalla consegna.',
+  },
+  {
+    question: 'Ma c’è la garanzia?',
+    answer:
+      'Certo! Er Sampietrino è coperto dalla garanzia legale di conformità di 2 anni, prevista per gli acquisti dei consumatori. Se qualcosa non va come dovrebbe, non te la devi sbrigà da solo!',
+  },
+  {
+    question: 'Ma er sampietrino vissuto è già rovinato?',
+    answer:
+      'Le piccole irregolarità e le imperfezioni dichiarate fanno parte del suo carattere: ogni pezzo ha la sua storia, mica è uscito da una catena di montaggio! Se invece arriva danneggiato durante il trasporto, contattaci: quello non fa parte del look.',
   },
 ]
 
@@ -31,7 +46,6 @@ function ProductPage() {
   const [selectedVariant, setSelectedVariant] = useState(
     sampietrinoVariants[0],
   )
-
   const [quantity, setQuantity] = useState(1)
   const [openFaq, setOpenFaq] = useState(null)
 
@@ -104,7 +118,9 @@ function ProductPage() {
               <button
                 type="button"
                 onClick={() =>
-                  setQuantity((current) => Math.max(1, current - 1))
+                  setQuantity((current) =>
+                    Math.max(1, current - 1),
+                  )
                 }
                 aria-label="Diminuisci quantità"
               >
@@ -137,6 +153,46 @@ function ProductPage() {
           <p className="product-detail-note">
             Un piccolo pezzo di Roma, da portare sempre con te.
           </p>
+
+          {/* Spedizione, resi e garanzia */}
+          <div className="product-purchase-info">
+            <div className="purchase-info-item">
+              <Truck
+                className="purchase-info-icon"
+                aria-hidden="true"
+              />
+
+              <div>
+                <h3>Spedizione</h3>
+                <p>4,90 € · Gratis da 99 €</p>
+                <p>Consegna in 2–5 giorni lavorativi</p>
+              </div>
+            </div>
+
+            <div className="purchase-info-item">
+              <PackageCheck
+                className="purchase-info-icon"
+                aria-hidden="true"
+              />
+
+              <div>
+                <h3>Resi</h3>
+                <p>Possibilità di reso entro 30 giorni</p>
+              </div>
+            </div>
+
+            <div className="purchase-info-item">
+              <ShieldCheck
+                className="purchase-info-icon"
+                aria-hidden="true"
+              />
+
+              <div>
+                <h3>Garanzia</h3>
+                <p>2 anni di garanzia legale</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -198,7 +254,7 @@ function ProductPage() {
       </section>
 
       {/* Domande frequenti */}
-      <section className="product-faq">
+      <section className="product-faq" id="faq">
         <div className="product-faq-heading">
           <p className="product-detail-eyebrow">
             TE LO SPIAMO NOI
@@ -217,7 +273,10 @@ function ProductPage() {
             const answerId = `faq-answer-${index}`
 
             return (
-              <article className="product-faq-item" key={item.question}>
+              <article
+                className="product-faq-item"
+                key={item.question}
+              >
                 <h3>
                   <button
                     type="button"
@@ -229,7 +288,11 @@ function ProductPage() {
                     <span>{item.question}</span>
 
                     <ChevronDown
-                      className={isOpen ? 'faq-chevron is-open' : 'faq-chevron'}
+                      className={
+                        isOpen
+                          ? 'faq-chevron is-open'
+                          : 'faq-chevron'
+                      }
                       size={20}
                       aria-hidden="true"
                     />

@@ -1,6 +1,21 @@
 import './MyFooter.css'
+import { Link, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function MyFooter() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash === '#faq') {
+      requestAnimationFrame(() => {
+        document.getElementById('faq')?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      })
+    }
+  }, [location])
+
   return (
     <footer className="footer">
       <div className="footer-main">
@@ -16,7 +31,7 @@ function MyFooter() {
         <div className="footer-column">
           <h3>Assistenza</h3>
           <a href="#">Contattaci</a>
-          <a href="#">FAQ</a>
+          <Link to="/prodotto#faq">FAQ</Link>
           <a href="#">Spedizioni</a>
           <a href="#">Resi e rimborsi</a>
         </div>

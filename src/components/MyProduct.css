@@ -68,13 +68,13 @@
   font-weight: 700;
 }
 
+/* Etichetta e pulsanti delle varianti */
 .variant-label {
   margin-bottom: 14px;
   font-size: 0.85rem;
   font-weight: 700;
 }
 
-/* Pulsanti per scegliere la variante */
 .variant-options {
   display: flex;
   flex-wrap: wrap;
@@ -109,11 +109,51 @@
   outline-offset: 4px;
 }
 
+/* Nota sotto le varianti */
 .product-note {
   margin-top: 28px;
   color: #716d65;
   font-size: 0.85rem;
   line-height: 1.5;
+}
+
+/* Box con le informazioni pratiche */
+.product-policies {
+  display: grid;
+  gap: 20px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.product-policy {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+}
+
+/* Icone Lucide */
+.product-policy-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--color-accent);
+  line-height: 1.5;
+}
+
+.product-policy h3 {
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.product-policy p {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
 
 /* Adattamento per tablet e smartphone */
@@ -143,6 +183,10 @@
   .variant-button {
     padding: 10px 12px;
     font-size: 0.8rem;
+  }
+
+  .product-policies {
+    gap: 18px;
   }
 }
 
