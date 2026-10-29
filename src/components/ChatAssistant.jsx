@@ -3,6 +3,7 @@ import { MessageCircle, X, Send, Bot, RotateCcw, Minus } from 'lucide-react'
 import './ChatAssistant.css'
 
 const STORAGE_KEY = 'roma-daje-chat'
+const OPEN_DELAY = 300
 
 const suggestedQuestions = [
   'Che versioni esistono?',
@@ -28,6 +29,7 @@ function loadChat() {
         text: welcomeMessage,
       },
     ],
+    pendingReplies: [],
   }
 
   try {
@@ -37,7 +39,7 @@ function loadChat() {
 
     const parsedChat = JSON.parse(savedChat)
 
-    // Controlla che i dati salvati siano utilizzabili
+    // Controlla che i messaggi salvati siano validi
     if (
       !Array.isArray(parsedChat.messages) ||
       parsedChat.messages.length === 0 ||
@@ -51,6 +53,18 @@ function loadChat() {
       return initialState
     }
 
+    // Recupera le risposte ancora in attesa
+    const pendingReplies = Array.isArray(
+      parsedChat.pendingReplies
+    )
+      ? parsedChat.pendingReplies.filter(
+          (item) =>
+            item &&
+            typeof item.text === 'string' &&
+            typeof item.id === 'number'
+        )
+      : []
+
     return {
       isOpen: parsedChat.isOpen === true,
       isMinimized: parsedChat.isMinimized === true,
@@ -59,6 +73,7 @@ function loadChat() {
           ? parsedChat.message
           : '',
       messages: parsedChat.messages,
+      pendingReplies,
     }
   } catch {
     return initialState
@@ -121,7 +136,7 @@ function getBotReply(message) {
     text.includes('consegna') ||
     text.includes('trasporto')
   ) {
-    return 'La spedizione costa 4,90 €. Ma se arrivi a 99 € di ordine, è gratis! Aò, almeno questa è una cosa che funziona a Roma 😎'
+    return 'La spedizione costa 4,90€. Ma se arrivi a 99€ di ordine, è gratis! Aò, almeno questa è una cosa che funziona a Roma 😎'
   }
 
   // Regalo
@@ -131,7 +146,7 @@ function getBotReply(message) {
     text.includes('nasone') ||
     text.includes('barraccia')
   ) {
-    return 'Da 99 € di ordine ricevi in regalo la nostra barraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
+    return 'Da 99€ di ordine ricevi in regalo la nostra barraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
   }
 
   // Prezzo
@@ -140,7 +155,7 @@ function getBotReply(message) {
     text.includes('costa') ||
     text.includes('quanto')
   ) {
-    return 'Er Sampietrino costa 59,90 €. Un piccolo pezzo de Roma, senza doverlo raccattare per strada. 😉'
+    return 'Er Sampietrino costa 59,90€. Un piccolo pezzo de Roma, senza doverlo raccattare per strada. 😉'
   }
 
   // Informazioni generali sul prodotto
@@ -180,11 +195,111 @@ function ChatAssistant() {
   )
   const [message, setMessage] = useState(initialChat.message)
   const [messages, setMessages] = useState(initialChat.messages)
+  const [pendingReplies, setPendingReplies] = useState(
+    initialChat.pendingReplies
+  )
 
-  // Riferimento diretto all'area dei messaggi
+  // Controlla quando rendere visibile la finestra
+  const [isWindowVisible, setIsWindowVisible] = useState(false)
+
+  // Riferimenti agli elementi della chat
+  const chatWindowRef = useRef(null)
+  const chatLauncherRef = useRef(null)
   const chatMessagesRef = useRef(null)
 
-  // Salva automaticamente lo stato aggiornato della chat
+  // Tiene traccia dei timer delle risposte
+  const replyTimersRef = useRef(new Map())
+
+  // Evita di recuperare due volte le stesse risposte
+  const recoveryDoneRef = useRef(false)
+
+  // Annulla tutti i timer delle risposte in attesa
+  function cancelPendingTimers() {
+    replyTimersRef.current.forEach((timerId) => {
+      clearTimeout(timerId)
+    })
+
+    replyTimersRef.current.clear()
+  }
+
+  // Ritarda l'apertura e poi avvia l'animazione
+  useEffect(() => {
+    if (!isOpen || isMinimized) {
+      setIsWindowVisible(false)
+      return
+    }
+
+    setIsWindowVisible(false)
+
+    const timerId = setTimeout(() => {
+      setIsWindowVisible(true)
+    }, OPEN_DELAY)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [isOpen, isMinimized])
+
+  // Minimizza la chat quando si tocca fuori, solo su mobile
+  useEffect(() => {
+    if (!isOpen || isMinimized) return
+
+    function handleOutsidePointer(event) {
+      const isMobile = window.matchMedia(
+        '(max-width: 767px)'
+      ).matches
+
+      if (!isMobile) return
+
+      if (chatWindowRef.current?.contains(event.target)) {
+        return
+      }
+
+      if (chatLauncherRef.current?.contains(event.target)) {
+        return
+      }
+
+      setIsMinimized(true)
+    }
+
+    document.addEventListener(
+      'pointerdown',
+      handleOutsidePointer
+    )
+
+    return () => {
+      document.removeEventListener(
+        'pointerdown',
+        handleOutsidePointer
+      )
+    }
+  }, [isOpen, isMinimized])
+
+  // Recupera subito le risposte interrotte da un reload
+  useEffect(() => {
+    if (recoveryDoneRef.current) return
+
+    recoveryDoneRef.current = true
+
+    if (initialChat.pendingReplies.length === 0) return
+
+    const recoveredMessages = initialChat.pendingReplies.map(
+      (item) => ({
+        id: Date.now() + Math.random(),
+        sender: 'bot',
+        text: getBotReply(item.text),
+      })
+    )
+
+    setMessages((previous) => [
+      ...previous,
+      ...recoveredMessages,
+    ])
+
+    setPendingReplies([])
+  }, [initialChat])
+
+  // Salva lo stato aggiornato della chat
   useEffect(() => {
     try {
       localStorage.setItem(
@@ -194,14 +309,15 @@ function ChatAssistant() {
           isMinimized,
           message,
           messages,
+          pendingReplies,
         })
       )
     } catch {
-      // La chat continua a funzionare anche se il salvataggio non è disponibile
+      // La chat continua a funzionare anche senza salvataggio
     }
-  }, [isOpen, isMinimized, message, messages])
+  }, [isOpen, isMinimized, message, messages, pendingReplies])
 
-  // Scorre automaticamente fino all'ultimo messaggio, anche dopo F5
+  // Scorre automaticamente fino all'ultimo messaggio
   useLayoutEffect(() => {
     if (isOpen && !isMinimized) {
       requestAnimationFrame(() => {
@@ -214,7 +330,7 @@ function ChatAssistant() {
     }
   }, [messages, isOpen, isMinimized])
 
-  // Invia la domanda subito e mostra la risposta dopo una breve pausa
+  // Invia la domanda e programma la risposta del bot
   function sendMessage(textToSend = message) {
     const text = textToSend.trim()
 
@@ -226,15 +342,39 @@ function ChatAssistant() {
       text,
     }
 
-    setMessages((previous) => [
-      ...previous,
-      userMessage,
-    ])
+    const nextMessages = [...messages, userMessage]
 
+    const nextPendingReplies = [
+      ...pendingReplies,
+      {
+        id: userMessage.id,
+        text,
+      },
+    ]
+
+    setMessages(nextMessages)
+    setPendingReplies(nextPendingReplies)
     setMessage('')
 
-    // Simula una breve pausa prima della risposta del bot
-    setTimeout(() => {
+    // Salva subito domanda e risposta in attesa
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          isOpen,
+          isMinimized,
+          message: '',
+          messages: nextMessages,
+          pendingReplies: nextPendingReplies,
+        })
+      )
+    } catch {
+      // La chat continua a funzionare anche senza salvataggio
+    }
+
+    const timerId = setTimeout(() => {
+      replyTimersRef.current.delete(userMessage.id)
+
       const botMessage = {
         id: Date.now(),
         sender: 'bot',
@@ -245,7 +385,15 @@ function ChatAssistant() {
         ...previous,
         botMessage,
       ])
+
+      setPendingReplies((previous) =>
+        previous.filter(
+          (item) => item.id !== userMessage.id
+        )
+      )
     }, 900)
+
+    replyTimersRef.current.set(userMessage.id, timerId)
   }
 
   function handleSubmit(event) {
@@ -253,18 +401,35 @@ function ChatAssistant() {
     sendMessage()
   }
 
-  // Azzera i messaggi e ripristina il messaggio iniziale
+  // Azzera la conversazione e annulla le risposte in attesa
   function resetChat() {
-    setMessages([
-      {
-        id: 1,
-        sender: 'bot',
-        text: welcomeMessage,
-      },
-    ])
+    cancelPendingTimers()
 
+    const welcome = {
+      id: Date.now(),
+      sender: 'bot',
+      text: welcomeMessage,
+    }
+
+    setMessages([welcome])
+    setPendingReplies([])
     setMessage('')
     setIsMinimized(false)
+
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          isOpen,
+          isMinimized: false,
+          message: '',
+          messages: [welcome],
+          pendingReplies: [],
+        })
+      )
+    } catch {
+      // La chat continua a funzionare anche senza salvataggio
+    }
   }
 
   // Chiude la chat e azzera la conversazione
@@ -277,7 +442,10 @@ function ChatAssistant() {
     <div className="chat-assistant">
       {isOpen && !isMinimized && (
         <section
-          className="chat-window"
+          ref={chatWindowRef}
+          className={`chat-window ${
+            isWindowVisible ? 'chat-window--visible' : ''
+          }`}
           aria-label="Chat con Er Bot de Roma"
         >
           <header className="chat-header">
@@ -345,11 +513,16 @@ function ChatAssistant() {
             </div>
           )}
 
-          <form className="chat-form" onSubmit={handleSubmit}>
+          <form
+            className="chat-form"
+            onSubmit={handleSubmit}
+          >
             <input
               type="text"
               value={message}
-              onChange={(event) => setMessage(event.target.value)}
+              onChange={(event) =>
+                setMessage(event.target.value)
+              }
               placeholder="Scrivi un messaggio..."
               aria-label="Scrivi un messaggio"
               maxLength={500}
@@ -371,6 +544,7 @@ function ChatAssistant() {
       )}
 
       <button
+        ref={chatLauncherRef}
         type="button"
         className={`chat-launcher ${
           isOpen && !isMinimized
