@@ -1,5 +1,6 @@
+
 import { useState } from 'react'
-import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck } from 'lucide-react'
+import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck, MapPin, Sparkles, Gift } from 'lucide-react'
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
@@ -249,6 +250,61 @@ function ProductPage() {
             <p className="product-spec-label">UTILIZZO</p>
             <h3>Oggetto decorativo</h3>
             <p>Fa scena, mica lavori stradali.</p>
+          </article>
+        </div>
+      </section>
+
+      {/* Tre motivi per scegliere Er Sampietrino */}
+      <section className="product-reasons">
+        <div className="product-reasons-heading">
+          <p className="product-detail-eyebrow">
+            PERCHÉ LUI?
+          </p>
+
+          <h2>Tre motivi per scegliere Er Sampietrino.</h2>
+        </div>
+
+        <div className="product-reasons-grid">
+          <article className="product-reason">
+            <MapPin
+              className="product-reason-icon"
+              aria-hidden="true"
+            />
+
+            <h3>Un pezzo de Roma</h3>
+
+            <p>
+              Un piccolo omaggio alla città, da tenere in casa
+              senza dover rifare le strade.
+            </p>
+          </article>
+
+          <article className="product-reason">
+            <Sparkles
+              className="product-reason-icon"
+              aria-hidden="true"
+            />
+
+            <h3>Arreda senza fa' storie</h3>
+
+            <p>
+              Sulla scrivania, sulla libreria o dove te pare.
+              Non è il solito soprammobile.
+            </p>
+          </article>
+
+          <article className="product-reason">
+            <Gift
+              className="product-reason-icon"
+              aria-hidden="true"
+            />
+
+            <h3>Un regalo co' personalità</h3>
+
+            <p>
+              Per chi Roma ce l'ha dentro, pure se vive
+              a chilometri di distanza.
+            </p>
           </article>
         </div>
       </section>

@@ -152,6 +152,64 @@
   line-height: 1.6;
 }
 
+/* Informazioni su spedizione, resi e garanzia */
+.product-purchase-info {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 24px;
+  padding: 18px 8px;
+  background-color: #eae4d9;
+  border: 1px solid #c9c0b2;
+  border-radius: 8px;
+}
+
+.purchase-info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 4px 10px;
+  text-align: center;
+}
+
+/* Divisori delle informazioni d'acquisto */
+.purchase-info-item + .purchase-info-item {
+  border-left: 1px solid #c9c0b2;
+}
+
+.purchase-info-item > div {
+  width: 100%;
+  min-width: 0;
+}
+
+.purchase-info-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.7;
+}
+
+.purchase-info-item h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.purchase-info-item p {
+  margin: 0;
+  color: #716d65;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Nasconde i tempi di consegna in questo riquadro */
+.purchase-info-item:first-child p + p {
+  display: none;
+}
+
 /* Scheda tecnica */
 .product-specs {
   max-width: 1200px;
@@ -231,6 +289,187 @@
   color: #716d65;
   font-size: 0.75rem;
   line-height: 1.5;
+}
+
+/* Tre motivi per scegliere Er Sampietrino */
+.product-reasons {
+  max-width: 1200px;
+  margin: 72px auto 24px;
+  padding-top: 48px;
+  border-top: 1px solid var(--color-border);
+}
+
+.product-reasons-heading {
+  margin-bottom: 32px;
+}
+
+.product-reasons-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+/* Tre colonne */
+.product-reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding-top: 20px;
+}
+
+.product-reason {
+  position: relative;
+  min-width: 0;
+  padding: 0 28px;
+}
+
+.product-reason:last-child {
+  padding-right: 0;
+}
+
+/* Morse verticale su desktop. Primo divisore: ROMA, Secondo divisore: DAJE. */
+.product-reason + .product-reason {
+  border-left: 1px solid #c9c0b2;
+}
+
+/* La linea viene coperta dalla sequenza Morse */
+.product-reason + .product-reason::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  display: block;
+  padding: 10px 0;
+  background-color: var(--color-bg, #fff);
+  color: #71685c;
+  font-family: monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.3;
+  white-space: nowrap;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.product-reason:nth-child(2)::before {
+  content: ".-. --- -- .- --..--";
+}
+
+.product-reason:nth-child(3)::before {
+  content: "-.. .- .--- . .-.-.-";
+}
+
+.product-reason-icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 16px;
+  stroke-width: 1.7;
+}
+
+.product-reason h3 {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.product-reason p {
+  margin: 0;
+  color: #716d65;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* FAQ - Domande frequenti */
+.product-faq {
+  max-width: 1200px;
+  margin: 80px auto 24px;
+  padding-top: 48px;
+  border-top: 1px solid var(--color-border);
+}
+
+.product-faq-heading {
+  margin-bottom: 28px;
+}
+
+.product-faq-heading h2 {
+  margin-bottom: 12px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.product-faq-heading > p:last-child {
+  color: #716d65;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.product-faq-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.product-faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.product-faq-item h3 {
+  margin: 0;
+}
+
+.product-faq-question {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 4px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  text-align: left;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.product-faq-question:hover {
+  color: var(--color-accent);
+}
+
+.product-faq-question:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.faq-chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.product-faq-answer {
+  padding: 0 36px 22px 4px;
+}
+
+.product-faq-answer p {
+  margin: 0;
+  color: #716d65;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+#faq {
+  scroll-margin-top: 100px;
 }
 
 /* Tablet */
@@ -327,7 +566,7 @@
   }
 }
 
-/* Adattamento dei pulsanti smartphone */
+/* Smartphone stretto */
 @media (max-width: 420px) {
   .product-page {
     padding: 24px 4%;
@@ -358,7 +597,7 @@
   }
 }
 
-/* Piccoli accorgimenti per l'immagine */
+/* Immagine prodotto su schermi intermedi */
 @media (min-width: 751px) and (max-width: 1100px) {
   .product-detail-image {
     width: 100%;
@@ -431,93 +670,117 @@
   }
 }
 
-/* FAQ - Domande frequenti */
-.product-faq {
-  max-width: 1200px;
-  margin: 80px auto 24px;
-  padding-top: 48px;
-  border-top: 1px solid var(--color-border);
+/* Informazioni acquisto su smartphone */
+@media (max-width: 600px) {
+  .product-purchase-info {
+    margin-top: 24px;
+    padding: 14px 4px;
+  }
+
+  .purchase-info-item {
+    gap: 7px;
+    padding: 4px 6px;
+  }
+
+  .purchase-info-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .purchase-info-item h3 {
+    font-size: 0.78rem;
+  }
+
+  .purchase-info-item p {
+    font-size: 0.7rem;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
 }
 
-.product-faq-heading {
-  margin-bottom: 28px;
-}
+/* Tre motivi su smartphone: divisori Morse orizzontali */
+@media (max-width: 600px) {
+  .product-reasons {
+    margin-top: 56px;
+    padding-top: 32px;
+  }
 
-.product-faq-heading h2 {
-  margin-bottom: 12px;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.05em;
-}
+  .product-reasons-heading {
+    margin-bottom: 24px;
+  }
 
-.product-faq-heading > p:last-child {
-  color: #716d65;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
+  .product-reasons-heading h2 {
+    font-size: 1.7rem;
+    line-height: 1.1;
+  }
 
-.product-faq-list {
-  border-top: 1px solid var(--color-border);
-}
+  .product-reasons-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 
-.product-faq-item {
-  border-bottom: 1px solid var(--color-border);
-}
+  .product-reason, .product-reason:first-child, .product-reason:last-child {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    column-gap: 12px;
+    align-items: start;
+    padding: 7px 0;
+  }
 
-.product-faq-item h3 {
-  margin: 0;
-}
+  .product-reason:first-child {
+    padding-top: 0;
+  }
 
-.product-faq-question {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 22px 4px;
-  border: 0;
-  background: transparent;
-  color: var(--color-text);
-  text-align: left;
-  font: inherit;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.5;
-  cursor: pointer;
-}
+  /* Niente linee verticali su mobile */
+  .product-reason + .product-reason {
+    border-left: none;
+    border-top: none;
+  }
 
-.product-faq-question:hover {
-  color: var(--color-accent);
-}
+  /* Il Morse diventa un piccolo divisore orizzontale */
+  .product-reason + .product-reason::before {
+    position: static;
+    grid-column: 1 / -1;
+    display: block;
+    width: fit-content;
+    margin: 0 0 18px 40px;
+    padding: 0;
+    background: transparent;
+    color: #71685c;
+    font-family: monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    line-height: 1.3;
+    white-space: nowrap;
+    transform: none;
+  }
 
-.product-faq-question:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-}
+  .product-reason-icon {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+    width: 24px;
+    height: 24px;
+    margin: 2px 0 0;
+  }
 
-.faq-chevron {
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
+  .product-reason h3 {
+    grid-column: 2;
+    grid-row: 2;
+    margin-bottom: 6px;
+    font-size: 1rem;
+  }
 
-.faq-chevron.is-open {
-  transform: rotate(180deg);
-}
+  .product-reason p {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: 0.9rem;
+  }
 
-.product-faq-answer {
-  padding: 0 36px 22px 4px;
-}
-
-.product-faq-answer p {
-  margin: 0;
-  color: #716d65;
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-#faq {
-  scroll-margin-top: 100px;
+  /* La prima ragione non ha divisore sopra */
+  .product-reason:first-child::before {
+    content: none;
+  }
 }
 
 /* FAQ su smartphone */
@@ -544,92 +807,5 @@
   .product-faq-answer p {
     font-size: 0.85rem;
     line-height: 1.6;
-  }
-}
-
-
-/* Informazioni su spedizione, resi e garanzia */
-.product-purchase-info {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 24px;
-  padding: 18px 8px;
-  background-color: #eae4d9;
-  border: 1px solid #c9c0b2;
-  border-radius: 8px;
-}
-
-.purchase-info-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
-  min-width: 0;
-  padding: 4px 10px;
-  text-align: center;
-}
-
-/* Barre divisorie */
-.purchase-info-item + .purchase-info-item {
-  border-left: 1px solid #c9c0b2;
-}
-
-.purchase-info-item > div {
-  width: 100%;
-  min-width: 0;
-}
-
-.purchase-info-icon {
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  stroke-width: 1.7;
-}
-
-.purchase-info-item h3 {
-  margin: 0;
-  font-size: 0.9rem;
-  font-weight: 800;
-}
-
-.purchase-info-item p {
-  margin: 0;
-  color: #716d65;
-  font-size: 0.8rem;
-  line-height: 1.4;
-}
-
-/* Nasconde il dettaglio dei tempi in questo riquadro */
-.purchase-info-item:first-child p + p {
-  display: none;
-}
-
-/* Smartphone */
-@media (max-width: 600px) {
-  .product-purchase-info {
-    margin-top: 24px;
-    padding: 14px 4px;
-  }
-
-  .purchase-info-item {
-    gap: 7px;
-    padding: 4px 6px;
-  }
-
-  .purchase-info-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .purchase-info-item h3 {
-    font-size: 0.78rem;
-  }
-
-  .purchase-info-item p {
-    font-size: 0.7rem;
-    overflow-wrap: anywhere;
-    hyphens: auto;
   }
 }
