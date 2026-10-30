@@ -18,6 +18,34 @@ function MyFooter() {
 
   return (
     <footer className="footer">
+      <div className="footer-newsletter">
+        <div className="newsletter-text">
+          <h3>Le news, senza er traffico.</h3>
+          <p>
+            Novità, prodotti e storie direttamente
+            nella tua casella email.
+          </p>
+        </div>
+  
+        <form
+          className="newsletter-form"
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <label className="sr-only" htmlFor="newsletter-email">
+            La tua email
+          </label>
+  
+          <input
+            id="newsletter-email"
+            type="email"
+            placeholder="La tua email"
+            required
+          />
+
+          <button type="submit">Iscriviti ↗</button>
+        </form>
+        </div>
+
       <div className="footer-main">
         <div className="footer-brand">
           <a href="#" className="footer-logo">
@@ -58,37 +86,9 @@ function MyFooter() {
         </div>
       </div>
 
-      <div className="footer-newsletter">
-        <div className="newsletter-text">
-          <h3>Le news, senza er traffico.</h3>
-          <p>
-            Novità, prodotti e storie direttamente
-            nella tua casella email.
-          </p>
-        </div>
-
-        <form
-          className="newsletter-form"
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <label className="sr-only" htmlFor="newsletter-email">
-            La tua email
-          </label>
-
-          <input
-            id="newsletter-email"
-            type="email"
-            placeholder="La tua email"
-            required
-          />
-
-          <button type="submit">Iscriviti ↗</button>
-        </form>
-      </div>
-
       <div className="footer-bottom">
-        <p>© 2026 Roma, daje.</p>
-        <p>Fatto co' core a Roma.</p>
+        <p>© 2026 Roma, daje. Project by Claudia Sgalippa</p>
+        <p>Fatto co' core a Roma per Roma.</p>
       </div>
     </footer>
   )
