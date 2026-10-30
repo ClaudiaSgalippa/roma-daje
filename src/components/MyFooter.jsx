@@ -48,9 +48,9 @@ function MyFooter() {
 
       <div className="footer-main">
         <div className="footer-brand">
-          <a href="#" className="footer-logo">
+          <Link to="/" className="footer-logo">
             Roma, daje.
-          </a>
+          </Link>
 
           <p>La città, te la porti appresso.</p>
           <p>Oggetti con un po' de Roma dentro.</p>
@@ -74,8 +74,8 @@ function MyFooter() {
 
         <div className="footer-column">
           <h3>Il prodotto</h3>
-          <a href="#prodotto">Er Sampietrino</a>
-          <a href="#prodotto">Le varianti</a>
+          <Link to="/prodotto">Er Sampietrino</Link>
+          <Link to="/prodotto">Le varianti</Link>
         </div>
 
         <div className="footer-column">

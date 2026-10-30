@@ -83,6 +83,36 @@ function loadChat() {
 function getBotReply(message) {
   const text = message.toLowerCase().trim()
 
+  // Prezzo, spedizione e regalo vanno controllati prima delle versioni,
+  // così 'Quanto costa Er Magna?' risponde col prezzo.
+  // Spedizione
+  if (
+    text.includes('spedizion') ||
+    text.includes('consegna') ||
+    text.includes('trasporto')
+  ) {
+    return 'La spedizione costa 4,90€. Ma se arrivi a 99€ di ordine, è gratis! Aò, almeno questa è una cosa che funziona a Roma 😎'
+  }
+
+  // Regalo
+  if (
+    text.includes('regalo') ||
+    text.includes('omaggio') ||
+    text.includes('nasone') ||
+    text.includes('borraccia')
+  ) {
+    return 'Da 99€ di ordine ricevi in regalo la nostra borraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
+  }
+
+  // Prezzo
+  if (
+    text.includes('prezzo') ||
+    text.includes('costa') ||
+    text.includes('quanto')
+  ) {
+    return 'Er Sampietrino costa 59,90€. Un piccolo pezzo de Roma, senza doverlo raccattare per strada. 😉'
+  }
+
   // Tutte le versioni disponibili
   if (
     text.includes('version') ||
@@ -128,34 +158,6 @@ function getBotReply(message) {
     text.includes('centro storico')
   ) {
     return 'Er Vissuto è ispirato al Centro di Roma. C’ha un sottile segno sulla superficie: qualche storia in più da raccontà, senza perde er fascino. 🏛️'
-  }
-
-  // Spedizione
-  if (
-    text.includes('spedizion') ||
-    text.includes('consegna') ||
-    text.includes('trasporto')
-  ) {
-    return 'La spedizione costa 4,90€. Ma se arrivi a 99€ di ordine, è gratis! Aò, almeno questa è una cosa che funziona a Roma 😎'
-  }
-
-  // Regalo
-  if (
-    text.includes('regalo') ||
-    text.includes('omaggio') ||
-    text.includes('nasone') ||
-    text.includes('borraccia')
-  ) {
-    return 'Da 99€ di ordine ricevi in regalo la nostra borraccia a forma di nasone! Perché l’acqua è importante, ma berla alla romana è mejo. 💧'
-  }
-
-  // Prezzo
-  if (
-    text.includes('prezzo') ||
-    text.includes('costa') ||
-    text.includes('quanto')
-  ) {
-    return 'Er Sampietrino costa 59,90€. Un piccolo pezzo de Roma, senza doverlo raccattare per strada. 😉'
   }
 
   // Informazioni generali sul prodotto
