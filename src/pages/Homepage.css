@@ -248,6 +248,20 @@
   z-index: 2;
 }
 
+/* Animazioni allo scroll */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Mobile */
 @media (max-width: 700px) {
   .homepage {
@@ -393,5 +407,18 @@
 
   .reviews-balloon {
     width: 110px;
+  }
+}
+
+/* Preferenze di movimento ridotto */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .homepage-cloud {
+    animation: none;
   }
 }
