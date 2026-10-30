@@ -105,7 +105,7 @@
 /* Tablet */
 @media (max-width: 800px) {
   .navbar {
-    gap: 12px;
+    gap: 8px;
     padding: 16px 4%;
   }
 
@@ -114,7 +114,7 @@
   }
 
   .navbar nav {
-    gap: 14px;
+    gap: 10px;
   }
 
   .navbar nav a {
@@ -133,6 +133,23 @@
 
 /* Smartphone */
 @media (max-width: 600px) {
+  .navbar nav {
+    gap: 5px;
+  }
+
+  .navbar nav a {
+    font-size: 0.65rem;
+  }
+
+  .navbar nav a svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .navbar-cart-count {
+    font-size: 0.65rem;
+  }
+
   .promo-banner {
     padding: 9px 3%;
     gap: 3px;
@@ -155,7 +172,6 @@
 /* Smartphone piccolo */
 @media (max-width: 380px) {
   .navbar {
-    gap: 8px;
     padding: 14px 3%;
   }
 
@@ -164,7 +180,7 @@
   }
 
   .navbar nav {
-    gap: 9px;
+    gap: 5px;
   }
 
   .navbar nav a {
