@@ -8,18 +8,19 @@ function Homepage() {
     const elements = document.querySelectorAll('[data-reveal]')
 
     const observer = new IntersectionObserver(
-      (entries, observer) => {
+      (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible')
-            observer.unobserve(entry.target)
+          } else {
+            entry.target.classList.remove('is-visible')
           }
         })
       },
       {
         threshold: 0.12,
         rootMargin: '0px 0px -40px 0px',
-      }
+      },
     )
 
     elements.forEach((element) => observer.observe(element))
@@ -31,7 +32,6 @@ function Homepage() {
     <>
       <section className="homepage">
         <div className="homepage-content">
-
           {/* Nuvola decorativa a sinistra */}
           <div
             className="homepage-cloud homepage-cloud-left"
@@ -131,7 +131,6 @@ function Homepage() {
       </section>
 
       <section className="homepage-reviews" data-reveal>
-
         {/* Balloon decorativo a sinistra */}
         <div
           className="reviews-balloon reviews-balloon-left"

@@ -539,6 +539,20 @@
   scroll-margin-top: 100px;
 }
 
+/* Animazioni allo scroll */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Tablet */
 @media (max-width: 900px) {
   .product-specs {
@@ -916,14 +930,17 @@
 
 /* Preferenze di movimento ridotto */
 @media (prefers-reduced-motion: reduce) {
-  .detail-variant,
-  .product-spec-card,
-  .product-reason-icon {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 
-  .detail-variant:hover,
-  .product-spec-card:hover {
+  .detail-variant, .product-spec-card, .product-reason-icon {
+    transition: none;
+  }
+
+  .detail-variant:hover, .product-spec-card:hover {
     transform: none;
   }
 

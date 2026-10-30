@@ -1,6 +1,6 @@
-
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck, MapPin, Sparkles, Gift } from 'lucide-react'
+
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
@@ -58,6 +58,31 @@ function ProductPage() {
 
   const { addToCart } = useCart()
 
+  // Osserva le sezioni e ripete l'animazione a ogni ingresso nella viewport.
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]')
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+          } else {
+            entry.target.classList.remove('is-visible')
+          }
+        })
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      },
+    )
+
+    elements.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [])
+
   function handleIncreaseQuantity() {
     if (quantity >= MAX_QUANTITY) {
       setShowQuantityLimit(true)
@@ -110,7 +135,7 @@ function ProductPage() {
   return (
     <main className="product-page">
       {/* Dettagli principali del prodotto */}
-      <section className="product-detail">
+      <section className="product-detail" data-reveal>
         <div
           className="product-detail-image"
           onMouseMove={handleImageMouseMove}
@@ -267,7 +292,7 @@ function ProductPage() {
       </section>
 
       {/* Scheda tecnica */}
-      <section className="product-specs">
+      <section className="product-specs" data-reveal>
         <div className="product-specs-heading">
           <p className="product-detail-eyebrow">
             LA CARTA D'IDENTITÀ
@@ -282,28 +307,40 @@ function ProductPage() {
 
         <div className="product-specs-grid">
           <article className="product-spec-card">
-            <Mountain className="product-spec-icon" aria-hidden="true" />
+            <Mountain
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">MATERIALE</p>
             <h3>Pietra naturale</h3>
             <p>Leucitite</p>
           </article>
 
           <article className="product-spec-card">
-            <Landmark className="product-spec-icon" aria-hidden="true" />
+            <Landmark
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">TIPOLOGIA</p>
             <h3>Sampietrino romano</h3>
             <p>Un classico de Roma.</p>
           </article>
 
           <article className="product-spec-card">
-            <Ruler className="product-spec-icon" aria-hidden="true" />
+            <Ruler
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">DIMENSIONI</p>
             <h3>12 × 12 × 6 cm</h3>
             <p>Piccolo fuori, romano dentro.</p>
           </article>
 
           <article className="product-spec-card">
-            <House className="product-spec-icon" aria-hidden="true" />
+            <House
+              className="product-spec-icon"
+              aria-hidden="true"
+            />
             <p className="product-spec-label">UTILIZZO</p>
             <h3>Oggetto decorativo</h3>
             <p>Fa scena, mica lavori stradali.</p>
@@ -312,7 +349,7 @@ function ProductPage() {
       </section>
 
       {/* Tre motivi per scegliere Er Sampietrino */}
-      <section className="product-reasons">
+      <section className="product-reasons" data-reveal>
         <div className="product-reasons-heading">
           <p className="product-detail-eyebrow">PERCHÉ LUI?</p>
           <h2>Tre motivi per scegliere Er Sampietrino.</h2>
@@ -320,7 +357,10 @@ function ProductPage() {
 
         <div className="product-reasons-grid">
           <article className="product-reason">
-            <MapPin className="product-reason-icon" aria-hidden="true" />
+            <MapPin
+              className="product-reason-icon"
+              aria-hidden="true"
+            />
             <h3>Un pezzo de Roma</h3>
             <p>
               Un piccolo omaggio alla città, da tenere in casa
@@ -329,7 +369,10 @@ function ProductPage() {
           </article>
 
           <article className="product-reason">
-            <Sparkles className="product-reason-icon" aria-hidden="true" />
+            <Sparkles
+              className="product-reason-icon"
+              aria-hidden="true"
+            />
             <h3>Arreda senza fa' storie</h3>
             <p>
               Sulla scrivania, sulla libreria o dove te pare.
@@ -338,7 +381,10 @@ function ProductPage() {
           </article>
 
           <article className="product-reason">
-            <Gift className="product-reason-icon" aria-hidden="true" />
+            <Gift
+              className="product-reason-icon"
+              aria-hidden="true"
+            />
             <h3>Un regalo co' personalità</h3>
             <p>
               Per chi Roma ce l'ha dentro, pure se vive
@@ -349,7 +395,7 @@ function ProductPage() {
       </section>
 
       {/* Domande frequenti */}
-      <section className="product-faq" id="faq">
+      <section className="product-faq" id="faq" data-reveal>
         <div className="product-faq-heading">
           <p className="product-detail-eyebrow">TE LO SPIAMO NOI</p>
           <h2>Domande? Daje.</h2>
