@@ -14,6 +14,8 @@
 
 /* Area dell'immagine */
 .product-detail-image {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +25,7 @@
   padding: 16px;
   box-sizing: border-box;
   background-color: #eae4d9;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .product-detail-image img {
@@ -32,6 +34,25 @@
   height: 100%;
   object-fit: contain;
   object-position: center;
+  user-select: none;
+}
+
+/* Finestra di ingrandimento */
+.product-image-zoom {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 16px);
+  width: 240px;
+  height: 240px;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-size: 300%;
+  background-color: #eae4d9;
+  border: 1px solid #c9c0b2;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  pointer-events: none;
 }
 
 /* Informazioni sul prodotto */
@@ -113,16 +134,6 @@
   outline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .detail-variant {
-    transition: none;
-  }
-
-  .detail-variant:hover {
-    transform: none;
-  }
-}
-
 /* Pulsanti per quantità e carrello */
 .product-detail-actions {
   display: flex;
@@ -159,9 +170,9 @@
   color: var(--color-bg);
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   white-space: nowrap;
   -webkit-tap-highlight-color: var(--color-accent);
+  transition: background-color 0.2s ease;
 }
 
 .add-to-cart-button:hover {
@@ -179,9 +190,11 @@
 /* Informazioni su spedizione, resi e garanzia */
 .product-purchase-info {
   display: grid;
+  grid-column: 2;
+  grid-row: 2;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  margin-top: 24px;
+  margin-top: 0;
   padding: 18px 8px;
   background-color: #eae4d9;
   border: 1px solid #c9c0b2;
@@ -199,7 +212,6 @@
   text-align: center;
 }
 
-/* Divisori delle informazioni d'acquisto */
 .purchase-info-item + .purchase-info-item {
   border-left: 1px solid #c9c0b2;
 }
@@ -229,7 +241,7 @@
   line-height: 1.4;
 }
 
-/* Nasconde i tempi di consegna in questo riquadro */
+/* Nasconde i tempi di consegna nel riquadro */
 .purchase-info-item:first-child p + p {
   display: none;
 }
@@ -278,6 +290,14 @@
   background-color: #eae4d9;
   border: 1px solid #c9c0b2;
   border-radius: 8px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.product-spec-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent);
 }
 
 .product-spec-icon {
@@ -335,7 +355,6 @@
   letter-spacing: -0.05em;
 }
 
-/* Tre colonne */
 .product-reasons-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -353,12 +372,11 @@
   padding-right: 0;
 }
 
-/* Morse verticale su desktop. Primo divisore: ROMA, Secondo divisore: DAJE. */
+/* Divisori Morse su desktop */
 .product-reason + .product-reason {
   border-left: 1px solid #c9c0b2;
 }
 
-/* La linea viene coperta dalla sequenza Morse */
 .product-reason + .product-reason::before {
   position: absolute;
   top: 50%;
@@ -391,6 +409,7 @@
   height: 26px;
   margin-bottom: 16px;
   stroke-width: 1.7;
+  transition: color 0.2s ease;
 }
 
 .product-reason h3 {
@@ -407,7 +426,11 @@
   line-height: 1.6;
 }
 
-/* FAQ - Domande frequenti */
+.product-reason:hover .product-reason-icon {
+  color: var(--color-accent);
+}
+
+/* FAQ */
 .product-faq {
   max-width: 1200px;
   margin: 80px auto 24px;
@@ -507,6 +530,36 @@
   }
 }
 
+/* Tablet: immagine e riquadro acquisto a sinistra, informazioni prodotto a destra */
+@media (min-width: 751px) and (max-width: 900px) {
+  .product-detail {
+    column-gap: 32px;
+    row-gap: 24px;
+  }
+
+  .product-detail-image {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .product-detail-info {
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+
+  .product-purchase-info {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  /* Rimuove le linee verticali, ma mantiene il Morse */
+  .product-reason + .product-reason {
+    border-left: none;
+  }
+}
+
 /* Smartphone */
 @media (max-width: 750px) {
   .product-page {
@@ -523,6 +576,13 @@
     width: 100%;
     max-width: 380px;
     padding: 12px;
+  }
+
+  .product-detail-image img {
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
   }
 
   .product-detail-info {
@@ -588,6 +648,12 @@
     margin-top: 18px;
     font-size: 0.8rem;
   }
+
+  .product-purchase-info {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 0;
+  }
 }
 
 /* Smartphone stretto */
@@ -621,28 +687,7 @@
   }
 }
 
-/* Immagine prodotto su schermi intermedi */
-@media (min-width: 751px) and (max-width: 1100px) {
-  .product-detail-image {
-    width: 100%;
-    min-width: 0;
-    min-height: 0;
-    padding: 16px;
-    aspect-ratio: 1 / 1;
-    box-sizing: border-box;
-  }
-
-  .product-detail-image img {
-    width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
-  }
-}
-
-/* Scheda tecnica su smartphone */
+/* Scheda tecnica e riquadro acquisto su smartphone */
 @media (max-width: 600px) {
   .product-specs {
     margin-top: 56px;
@@ -654,17 +699,13 @@
   }
 
   .product-specs-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
   .product-spec-card {
-    min-width: 0;
     min-height: 155px;
     padding: 14px 12px;
     gap: 8px;
-    border: 1px solid #c9c0b2;
-    border-radius: 8px;
   }
 
   .product-spec-icon {
@@ -692,10 +733,7 @@
   .product-specs-disclaimer {
     font-size: 0.7rem;
   }
-}
 
-/* Informazioni acquisto su smartphone */
-@media (max-width: 600px) {
   .product-purchase-info {
     margin-top: 24px;
     padding: 14px 4px;
@@ -722,7 +760,7 @@
   }
 }
 
-/* Tre motivi su smartphone: divisori Morse orizzontali */
+/* Tre motivi su smartphone */
 @media (max-width: 600px) {
   .product-reasons {
     margin-top: 56px;
@@ -740,7 +778,6 @@
 
   .product-reasons-grid {
     grid-template-columns: 1fr;
-    gap: 0;
   }
 
   .product-reason, .product-reason:first-child, .product-reason:last-child {
@@ -755,13 +792,10 @@
     padding-top: 0;
   }
 
-  /* Niente linee verticali su mobile */
   .product-reason + .product-reason {
-    border-left: none;
-    border-top: none;
+    border: 0;
   }
 
-  /* Il Morse diventa un piccolo divisore orizzontale */
   .product-reason + .product-reason::before {
     position: static;
     grid-column: 1 / -1;
@@ -801,7 +835,6 @@
     font-size: 0.9rem;
   }
 
-  /* La prima ragione non ha divisore sopra */
   .product-reason:first-child::before {
     content: none;
   }
@@ -865,8 +898,24 @@
   }
 }
 
+/* Rispetta le preferenze di chi riduce le animazioni */
 @media (prefers-reduced-motion: reduce) {
+  .detail-variant, .product-spec-card, .product-reason-icon {
+    transition: none;
+  }
+
+  .detail-variant:hover, .product-spec-card:hover {
+    transform: none;
+  }
+
   .quantity-limit-message {
     animation: none;
+  }
+}
+
+/* La lente non viene mostrata su touch o schermi piccoli */
+@media (hover: none), (max-width: 1100px) {
+  .product-image-zoom {
+    display: none;
   }
 }

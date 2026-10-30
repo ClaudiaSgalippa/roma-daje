@@ -1,4 +1,5 @@
-import { useState } from 'react'
+
+import { useRef, useState } from 'react'
 import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck, MapPin, Sparkles, Gift } from 'lucide-react'
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
@@ -51,6 +52,9 @@ function ProductPage() {
   const [quantity, setQuantity] = useState(1)
   const [showQuantityLimit, setShowQuantityLimit] = useState(false)
   const [openFaq, setOpenFaq] = useState(null)
+  const [zoomPosition, setZoomPosition] = useState(null)
+
+  const imageRef = useRef(null)
 
   const { addToCart } = useCart()
 
@@ -83,15 +87,52 @@ function ProductPage() {
     setOpenFaq((current) => (current === index ? null : index))
   }
 
+  function handleImageMouseMove(event) {
+    const image = imageRef.current
+
+    if (!image) return
+
+    const rect = image.getBoundingClientRect()
+
+    const x = Math.max(
+      0,
+      Math.min(100, ((event.clientX - rect.left) / rect.width) * 100),
+    )
+
+    const y = Math.max(
+      0,
+      Math.min(100, ((event.clientY - rect.top) / rect.height) * 100),
+    )
+
+    setZoomPosition({ x, y })
+  }
+
   return (
     <main className="product-page">
       {/* Dettagli principali del prodotto */}
       <section className="product-detail">
-        <div className="product-detail-image">
+        <div
+          className="product-detail-image"
+          onMouseMove={handleImageMouseMove}
+          onMouseLeave={() => setZoomPosition(null)}
+        >
           <img
+            ref={imageRef}
             src={selectedVariant.image}
             alt={selectedVariant.name}
+            draggable="false"
           />
+
+          {zoomPosition && (
+            <div
+              className="product-image-zoom"
+              style={{
+                backgroundImage: `url("${selectedVariant.image}")`,
+                backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}%`,
+              }}
+              aria-hidden="true"
+            />
+          )}
         </div>
 
         <div className="product-detail-info">
@@ -121,7 +162,10 @@ function ProductPage() {
                     ? 'detail-variant active'
                     : 'detail-variant'
                 }
-                onClick={() => setSelectedVariant(variant)}
+                onClick={() => {
+                  setSelectedVariant(variant)
+                  setZoomPosition(null)
+                }}
                 aria-pressed={selectedVariant.id === variant.id}
               >
                 {variant.name}
@@ -179,44 +223,44 @@ function ProductPage() {
           <p className="product-detail-note">
             Un piccolo pezzo di Roma, da portare sempre con te.
           </p>
+        </div>
 
-          {/* Spedizione, resi e garanzia */}
-          <div className="product-purchase-info">
-            <div className="purchase-info-item">
-              <Truck
-                className="purchase-info-icon"
-                aria-hidden="true"
-              />
+        {/* Spedizione, resi e garanzia */}
+        <div className="product-purchase-info">
+          <div className="purchase-info-item">
+            <Truck
+              className="purchase-info-icon"
+              aria-hidden="true"
+            />
 
-              <div>
-                <h3>Spedizione</h3>
-                <p>4,90 € · Gratis da 99 €</p>
-                <p>Consegna in 2–5 giorni lavorativi</p>
-              </div>
+            <div>
+              <h3>Spedizione</h3>
+              <p>4,90 € · Gratis da 99 €</p>
+              <p>Consegna in 2–5 giorni lavorativi</p>
             </div>
+          </div>
 
-            <div className="purchase-info-item">
-              <PackageCheck
-                className="purchase-info-icon"
-                aria-hidden="true"
-              />
+          <div className="purchase-info-item">
+            <PackageCheck
+              className="purchase-info-icon"
+              aria-hidden="true"
+            />
 
-              <div>
-                <h3>Resi</h3>
-                <p>Possibilità di reso entro 30 giorni</p>
-              </div>
+            <div>
+              <h3>Resi</h3>
+              <p>Possibilità di reso entro 30 giorni</p>
             </div>
+          </div>
 
-            <div className="purchase-info-item">
-              <ShieldCheck
-                className="purchase-info-icon"
-                aria-hidden="true"
-              />
+          <div className="purchase-info-item">
+            <ShieldCheck
+              className="purchase-info-icon"
+              aria-hidden="true"
+            />
 
-              <div>
-                <h3>Garanzia</h3>
-                <p>2 anni di garanzia legale</p>
-              </div>
+            <div>
+              <h3>Garanzia</h3>
+              <p>2 anni di garanzia legale</p>
             </div>
           </div>
         </div>
@@ -238,40 +282,28 @@ function ProductPage() {
 
         <div className="product-specs-grid">
           <article className="product-spec-card">
-            <Mountain
-              className="product-spec-icon"
-              aria-hidden="true"
-            />
+            <Mountain className="product-spec-icon" aria-hidden="true" />
             <p className="product-spec-label">MATERIALE</p>
             <h3>Pietra naturale</h3>
             <p>Leucitite</p>
           </article>
 
           <article className="product-spec-card">
-            <Landmark
-              className="product-spec-icon"
-              aria-hidden="true"
-            />
+            <Landmark className="product-spec-icon" aria-hidden="true" />
             <p className="product-spec-label">TIPOLOGIA</p>
             <h3>Sampietrino romano</h3>
             <p>Un classico de Roma.</p>
           </article>
 
           <article className="product-spec-card">
-            <Ruler
-              className="product-spec-icon"
-              aria-hidden="true"
-            />
+            <Ruler className="product-spec-icon" aria-hidden="true" />
             <p className="product-spec-label">DIMENSIONI</p>
             <h3>12 × 12 × 6 cm</h3>
             <p>Piccolo fuori, romano dentro.</p>
           </article>
 
           <article className="product-spec-card">
-            <House
-              className="product-spec-icon"
-              aria-hidden="true"
-            />
+            <House className="product-spec-icon" aria-hidden="true" />
             <p className="product-spec-label">UTILIZZO</p>
             <h3>Oggetto decorativo</h3>
             <p>Fa scena, mica lavori stradali.</p>
@@ -282,22 +314,14 @@ function ProductPage() {
       {/* Tre motivi per scegliere Er Sampietrino */}
       <section className="product-reasons">
         <div className="product-reasons-heading">
-          <p className="product-detail-eyebrow">
-            PERCHÉ LUI?
-          </p>
-
+          <p className="product-detail-eyebrow">PERCHÉ LUI?</p>
           <h2>Tre motivi per scegliere Er Sampietrino.</h2>
         </div>
 
         <div className="product-reasons-grid">
           <article className="product-reason">
-            <MapPin
-              className="product-reason-icon"
-              aria-hidden="true"
-            />
-
+            <MapPin className="product-reason-icon" aria-hidden="true" />
             <h3>Un pezzo de Roma</h3>
-
             <p>
               Un piccolo omaggio alla città, da tenere in casa
               senza dover rifare le strade.
@@ -305,13 +329,8 @@ function ProductPage() {
           </article>
 
           <article className="product-reason">
-            <Sparkles
-              className="product-reason-icon"
-              aria-hidden="true"
-            />
-
+            <Sparkles className="product-reason-icon" aria-hidden="true" />
             <h3>Arreda senza fa' storie</h3>
-
             <p>
               Sulla scrivania, sulla libreria o dove te pare.
               Non è il solito soprammobile.
@@ -319,13 +338,8 @@ function ProductPage() {
           </article>
 
           <article className="product-reason">
-            <Gift
-              className="product-reason-icon"
-              aria-hidden="true"
-            />
-
+            <Gift className="product-reason-icon" aria-hidden="true" />
             <h3>Un regalo co' personalità</h3>
-
             <p>
               Per chi Roma ce l'ha dentro, pure se vive
               a chilometri di distanza.
@@ -337,12 +351,8 @@ function ProductPage() {
       {/* Domande frequenti */}
       <section className="product-faq" id="faq">
         <div className="product-faq-heading">
-          <p className="product-detail-eyebrow">
-            TE LO SPIAMO NOI
-          </p>
-
+          <p className="product-detail-eyebrow">TE LO SPIAMO NOI</p>
           <h2>Domande? Daje.</h2>
-
           <p>
             Tutto quello che volevi sapere su Er Sampietrino.
           </p>
