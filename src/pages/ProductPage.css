@@ -89,16 +89,38 @@
   background: transparent;
   color: var(--color-text);
   cursor: pointer;
+  -webkit-tap-highlight-color: var(--color-accent);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease;
 }
 
 .detail-variant:hover {
   border-color: var(--color-text);
+  transform: translateY(-2px);
 }
 
 .detail-variant.active {
   background: var(--color-text);
   color: var(--color-bg);
   border-color: var(--color-text);
+}
+
+.detail-variant:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-variant {
+    transition: none;
+  }
+
+  .detail-variant:hover {
+    transform: none;
+  }
 }
 
 /* Pulsanti per quantità e carrello */
@@ -120,6 +142,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  -webkit-tap-highlight-color: var(--color-accent);
 }
 
 .quantity-selector span {
@@ -138,11 +161,12 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   white-space: nowrap;
+  -webkit-tap-highlight-color: var(--color-accent);
 }
 
 .add-to-cart-button:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+  background: var(--color-text);
+  border-color: var(--color-text);
 }
 
 .product-detail-note {
