@@ -3,6 +3,7 @@
   padding: 72px 6%;
 }
 
+/* Dettagli principali del prodotto */
 .product-detail {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
@@ -10,6 +11,25 @@
   gap: 64px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 40px;
+  box-sizing: border-box;
+
+  background-image:
+    linear-gradient(
+      rgba(248, 246, 241, 0.82),
+      rgba(248, 246, 241, 0.82)
+    ),
+    url('/images/colosseo.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 750px) {
+  .product-detail {
+    background-size: auto 40%;
+    background-position: center center;
+  }
 }
 
 /* Area dell'immagine */
@@ -96,7 +116,7 @@
   font-weight: 700;
 }
 
-/* Pulsanti per scegliere la variante */
+/* Scelta della variante */
 .product-detail-variants {
   display: flex;
   flex-wrap: wrap;
@@ -134,7 +154,7 @@
   outline-offset: 3px;
 }
 
-/* Pulsanti per quantità e carrello */
+/* Quantità e carrello */
 .product-detail-actions {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +207,7 @@
   line-height: 1.6;
 }
 
-/* Informazioni su spedizione, resi e garanzia */
+/* Spedizione, resi e garanzia */
 .product-purchase-info {
   display: grid;
   grid-column: 2;
@@ -530,11 +550,12 @@
   }
 }
 
-/* Tablet: immagine e riquadro acquisto a sinistra, informazioni prodotto a destra */
+/* Tablet: immagine e riquadro acquisto a sinistra */
 @media (min-width: 751px) and (max-width: 900px) {
   .product-detail {
     column-gap: 32px;
     row-gap: 24px;
+    padding: 32px;
   }
 
   .product-detail-image {
@@ -554,7 +575,6 @@
     grid-row: 2;
   }
 
-  /* Rimuove le linee verticali, ma mantiene il Morse */
   .product-reason + .product-reason {
     border-left: none;
   }
@@ -570,6 +590,7 @@
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     gap: 24px;
+    padding: 24px 16px;
   }
 
   .product-detail-image {
@@ -664,6 +685,7 @@
 
   .product-detail {
     gap: 20px;
+    padding: 20px 12px;
   }
 
   .product-detail-image {
@@ -687,7 +709,7 @@
   }
 }
 
-/* Scheda tecnica e riquadro acquisto su smartphone */
+/* Smartphone: scheda tecnica, riquadro acquisto, motivi e FAQ */
 @media (max-width: 600px) {
   .product-specs {
     margin-top: 56px;
@@ -758,10 +780,7 @@
     overflow-wrap: anywhere;
     hyphens: auto;
   }
-}
 
-/* Tre motivi su smartphone */
-@media (max-width: 600px) {
   .product-reasons {
     margin-top: 56px;
     padding-top: 32px;
@@ -838,10 +857,7 @@
   .product-reason:first-child::before {
     content: none;
   }
-}
 
-/* FAQ su smartphone */
-@media (max-width: 600px) {
   .product-faq {
     margin-top: 56px;
     padding-top: 32px;
@@ -898,13 +914,16 @@
   }
 }
 
-/* Rispetta le preferenze di chi riduce le animazioni */
+/* Preferenze di movimento ridotto */
 @media (prefers-reduced-motion: reduce) {
-  .detail-variant, .product-spec-card, .product-reason-icon {
+  .detail-variant,
+  .product-spec-card,
+  .product-reason-icon {
     transition: none;
   }
 
-  .detail-variant:hover, .product-spec-card:hover {
+  .detail-variant:hover,
+  .product-spec-card:hover {
     transform: none;
   }
 

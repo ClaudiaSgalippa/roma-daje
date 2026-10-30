@@ -4,10 +4,43 @@
   align-items: start;
   justify-items: center;
   gap: 64px;
-  max-width: 1200px;
+  width: 100%;
+  max-width: none;
   margin: 0 auto;
   padding: 100px 6%;
   box-sizing: border-box;
+
+  background-image:
+    linear-gradient(
+      rgba(248, 246, 241, 0.82),
+      rgba(248, 246, 241, 0.82)
+    ),
+    url('/images/colosseo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Sfondo responsive del Colosseo */
+@media (min-width: 1101px) {
+  .product-showcase {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+@media (min-width: 751px) and (max-width: 1100px) {
+  .product-showcase {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+@media (max-width: 750px) {
+  .product-showcase {
+    background-size: auto 65%;
+    background-position: center center;
+  }
 }
 
 /* Area dell'immagine */
@@ -204,5 +237,27 @@
     max-height: 100%;
     aspect-ratio: 1 / 1;
     object-fit: contain;
+  }
+}
+
+/* Sfondo responsive del Colosseo */
+@media (min-width: 1101px) {
+  .product-showcase {
+    background-size: auto;
+    background-position: center center;
+  }
+}
+
+@media (min-width: 751px) and (max-width: 1100px) {
+  .product-showcase {
+    background-size: cover;
+    background-position: center 80px;
+  }
+}
+
+@media (max-width: 750px) {
+  .product-showcase {
+    background-size: auto 40%;
+    background-position: center center;
   }
 }
