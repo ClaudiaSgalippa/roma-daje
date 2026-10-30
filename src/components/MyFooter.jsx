@@ -1,9 +1,17 @@
 import './MyFooter.css'
 import { Link, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { InstagramIcon, TikTokIcon, FacebookIcon } from './SocialIcons'
+
+const socialLinks = [
+  { name: 'Instagram', url: 'https://www.instagram.com/', Icon: InstagramIcon },
+  { name: 'TikTok', url: 'https://www.tiktok.com/', Icon: TikTokIcon },
+  { name: 'Facebook', url: 'https://www.facebook.com/', Icon: FacebookIcon },
+]
 
 function MyFooter() {
   const location = useLocation()
+  const [isSubscribed, setIsSubscribed] = useState(false)
 
   useEffect(() => {
     if (location.hash === '#faq') {
@@ -16,20 +24,31 @@ function MyFooter() {
     }
   }, [location])
 
+  // Newsletter dimostrativa: svuota il campo e mostra la conferma
+  function handleNewsletterSubmit(event) {
+    event.preventDefault()
+    event.currentTarget.reset()
+    setIsSubscribed(true)
+  }
+
   return (
     <footer className="footer">
       <div className="footer-newsletter">
         <div className="newsletter-text">
           <h3>Le news, senza er traffico.</h3>
-          <p>
-            Novità, prodotti e storie direttamente
-            nella tua casella email.
+          <p
+            className={isSubscribed ? 'newsletter-confirmed' : undefined}
+            role="status"
+          >
+            {isSubscribed
+              ? 'Daje! Iscrizione completata, grazie.'
+              : 'Novità, prodotti e storie direttamente nella tua casella email.'}
           </p>
         </div>
   
         <form
           className="newsletter-form"
-          onSubmit={(event) => event.preventDefault()}
+          onSubmit={handleNewsletterSubmit}
         >
           <label className="sr-only" htmlFor="newsletter-email">
             La tua email
@@ -80,9 +99,21 @@ function MyFooter() {
 
         <div className="footer-column">
           <h3>Seguici</h3>
-          <a href="#">Instagram ↗</a>
-          <a href="#">TikTok ↗</a>
-          <a href="#">Facebook ↗</a>
+
+          <div className="footer-socials">
+            {socialLinks.map(({ name, url, Icon }) => (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                title={name}
+              >
+                <Icon />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -34,6 +34,11 @@
   line-height: 1.6;
 }
 
+.newsletter-text .newsletter-confirmed {
+  color: #d8896f;
+  font-weight: 600;
+}
+
 .newsletter-form {
   display: flex;
   width: min(100%, 440px);
@@ -132,9 +137,36 @@
   transition: color 0.2s ease;
 }
 
-.footer-column a:hover,
-.footer-logo:hover {
+.footer-column a:hover, .footer-logo:hover {
   color: #d8896f;
+}
+
+/* Icone dei social */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #49463f;
+  border-radius: 50%;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.footer-socials a:hover {
+  border-color: #d8896f;
+}
+
+.footer-socials a:focus-visible {
+  outline: 2px solid #d8896f;
+  outline-offset: 2px;
 }
 
 /* Riga finale */
