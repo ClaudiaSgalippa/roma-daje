@@ -809,3 +809,40 @@
     line-height: 1.6;
   }
 }
+
+/* Messaggio quando si supera la quantità massima */
+.quantity-limit-message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--color-accent);
+  background-color: #eae4d9;
+  color: var(--color-text);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  animation: quantity-message-appear 0.2s ease-out;
+}
+
+.quantity-limit-message strong {
+  font-weight: 800;
+}
+
+@keyframes quantity-message-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quantity-limit-message {
+    animation: none;
+  }
+}

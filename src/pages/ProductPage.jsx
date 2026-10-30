@@ -1,9 +1,10 @@
-
 import { useState } from 'react'
 import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck, MapPin, Sparkles, Gift } from 'lucide-react'
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
+
+const MAX_QUANTITY = 99
 
 const faqItems = [
   {
@@ -48,9 +49,25 @@ function ProductPage() {
     sampietrinoVariants[0],
   )
   const [quantity, setQuantity] = useState(1)
+  const [showQuantityLimit, setShowQuantityLimit] = useState(false)
   const [openFaq, setOpenFaq] = useState(null)
 
   const { addToCart } = useCart()
+
+  function handleIncreaseQuantity() {
+    if (quantity >= MAX_QUANTITY) {
+      setShowQuantityLimit(true)
+      return
+    }
+
+    setQuantity((current) => current + 1)
+    setShowQuantityLimit(false)
+  }
+
+  function handleDecreaseQuantity() {
+    setQuantity((current) => Math.max(1, current - 1))
+    setShowQuantityLimit(false)
+  }
 
   function handleAddToCart() {
     addToCart(
@@ -118,11 +135,7 @@ function ProductPage() {
             <div className="quantity-selector">
               <button
                 type="button"
-                onClick={() =>
-                  setQuantity((current) =>
-                    Math.max(1, current - 1),
-                  )
-                }
+                onClick={handleDecreaseQuantity}
                 aria-label="Diminuisci quantità"
               >
                 −
@@ -132,10 +145,9 @@ function ProductPage() {
 
               <button
                 type="button"
-                onClick={() =>
-                  setQuantity((current) => current + 1)
-                }
+                onClick={handleIncreaseQuantity}
                 aria-label="Aumenta quantità"
+                aria-disabled={quantity >= MAX_QUANTITY}
               >
                 +
               </button>
@@ -150,6 +162,19 @@ function ProductPage() {
               {(59.9 * quantity).toFixed(2).replace('.', ',')} €
             </button>
           </div>
+
+          {showQuantityLimit && (
+            <div
+              className="quantity-limit-message"
+              role="status"
+              aria-live="polite"
+            >
+              <strong>Aò, piano!</strong>
+              <span>
+                99 sampietrini bastano, che devi fa', pavimentà er Colosseo?
+              </span>
+            </div>
+          )}
 
           <p className="product-detail-note">
             Un piccolo pezzo di Roma, da portare sempre con te.

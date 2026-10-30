@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import './CartPage.css'
 
 const FREE_SHIPPING_THRESHOLD = 99
 const SHIPPING_COST = 4.9
+const MAX_QUANTITY = 99
 
 function CartPage() {
   const {
@@ -12,6 +14,8 @@ function CartPage() {
     updateQuantity,
     removeFromCart,
   } = useCart()
+
+  const [showQuantityLimit, setShowQuantityLimit] = useState(null)
 
   const hasFreeShipping = cartTotal >= FREE_SHIPPING_THRESHOLD
 
@@ -24,6 +28,21 @@ function CartPage() {
     0,
     FREE_SHIPPING_THRESHOLD - cartTotal,
   )
+
+  function handleIncreaseQuantity(item) {
+    if (item.quantity >= MAX_QUANTITY) {
+      setShowQuantityLimit(item.id)
+      return
+    }
+
+    setShowQuantityLimit(null)
+    updateQuantity(item.id, item.quantity + 1)
+  }
+
+  function handleDecreaseQuantity(item) {
+    setShowQuantityLimit(null)
+    updateQuantity(item.id, item.quantity - 1)
+  }
 
   return (
     <main className="cart-page">
@@ -59,9 +78,7 @@ function CartPage() {
                     <div className="quantity-selector">
                       <button
                         type="button"
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity - 1)
-                        }
+                        onClick={() => handleDecreaseQuantity(item)}
                         aria-label={`Diminuisci quantità di ${item.name}`}
                       >
                         −
@@ -71,9 +88,7 @@ function CartPage() {
 
                       <button
                         type="button"
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
-                        }
+                        onClick={() => handleIncreaseQuantity(item)}
                         aria-label={`Aumenta quantità di ${item.name}`}
                       >
                         +
@@ -88,6 +103,13 @@ function CartPage() {
                       Rimuovi
                     </button>
                   </div>
+
+                  {showQuantityLimit === item.id && (
+                    <p className="cart-quantity-limit" role="alert">
+                      Aò, 99 so' già tanti! Nun vorrai mica rifà
+                      tutta la strada?
+                    </p>
+                  )}
                 </div>
 
                 <p className="cart-item-subtotal">

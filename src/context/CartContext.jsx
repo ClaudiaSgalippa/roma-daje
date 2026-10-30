@@ -2,11 +2,22 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 const CartContext = createContext()
 
+const MAX_QUANTITY = 99
+
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
     try {
       const savedCart = localStorage.getItem('roma-daje-cart')
-      return savedCart ? JSON.parse(savedCart) : []
+      const parsedCart = savedCart ? JSON.parse(savedCart) : []
+
+      // Controlla anche i dati già salvati nel localStorage
+      return parsedCart.map((item) => ({
+        ...item,
+        quantity: Math.min(
+          Math.max(1, Math.floor(Number(item.quantity) || 1)),
+          MAX_QUANTITY,
+        ),
+      }))
     } catch {
       return []
     }
@@ -17,6 +28,11 @@ export function CartProvider({ children }) {
   }, [cartItems])
 
   function addToCart(product, quantity = 1) {
+    const requestedQuantity = Math.max(
+      1,
+      Math.floor(Number(quantity) || 1),
+    )
+
     setCartItems((currentItems) => {
       const existingItem = currentItems.find(
         (item) => item.id === product.id,
@@ -25,20 +41,39 @@ export function CartProvider({ children }) {
       if (existingItem) {
         return currentItems.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+            ? {
+                ...item,
+                quantity: Math.min(
+                  item.quantity + requestedQuantity,
+                  MAX_QUANTITY,
+                ),
+              }
             : item,
         )
       }
 
-      return [...currentItems, { ...product, quantity }]
+      return [
+        ...currentItems,
+        {
+          ...product,
+          quantity: Math.min(requestedQuantity, MAX_QUANTITY),
+        },
+      ]
     })
   }
 
   function updateQuantity(productId, quantity) {
+    const requestedQuantity = Math.floor(Number(quantity) || 0)
+
     setCartItems((currentItems) =>
       currentItems
         .map((item) =>
-          item.id === productId ? { ...item, quantity } : item,
+          item.id === productId
+            ? {
+                ...item,
+                quantity: Math.min(requestedQuantity, MAX_QUANTITY),
+              }
+            : item,
         )
         .filter((item) => item.quantity > 0),
     )
