@@ -1,5 +1,9 @@
 /* Hero homepage */
 .homepage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
   display: grid;
   grid-template-columns: 1fr 0.85fr;
   align-items: center;
@@ -51,6 +55,61 @@
 .homepage-cta:hover {
   background-color: var(--color-accent);
   transform: translateY(-2px);
+}
+
+/* Nuvole decorative */
+.homepage-cloud {
+  position: absolute;
+  z-index: -1;
+  width: clamp(280px, 38vw, 460px);
+  color: #CC8C77;
+  opacity: 0.3;
+  pointer-events: none;
+  animation-duration: 1.6s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.homepage-cloud svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Nuvola in alto a sinistra */
+.homepage-cloud-left {
+  top: 5%;
+  left: 0;
+  animation-name: cloud-from-left;
+}
+
+/* Nuvola in basso a destra */
+.homepage-cloud-right {
+  right: 0;
+  bottom: 5%;
+  animation-name: cloud-from-right;
+}
+
+/* Entrata da sinistra */
+@keyframes cloud-from-left {
+  from {
+    transform: translateX(-110%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Entrata da destra */
+@keyframes cloud-from-right {
+  from {
+    transform: translateX(110%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* Immagine del prodotto */
@@ -146,7 +205,50 @@
   line-height: 1.6;
 }
 
-/* Tablet */
+/* Sezione recensioni: livello 0, sfondo */
+.homepage-reviews {
+  position: relative;
+  isolation: isolate;
+  background-color: #f8f6f1;
+}
+
+/* Balloon decorativi: livello 1 */
+.reviews-balloon {
+  position: absolute;
+  z-index: 1;
+  width: clamp(140px, 19vw, 230px);
+  color: #CC8C77;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.reviews-balloon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Balloon sinistro */
+.reviews-balloon-left {
+  top: 8%;
+  left: 2%;
+  transform: rotate(-10deg);
+}
+
+/* Balloon destro */
+.reviews-balloon-right {
+  right: 2%;
+  bottom: 8%;
+  transform: rotate(10deg) scaleX(-1);
+}
+
+/* Livello 2: contenuti delle recensioni */
+.homepage-reviews .reviews-section {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile */
 @media (max-width: 700px) {
   .homepage {
     grid-template-columns: minmax(0, 1fr);
@@ -156,6 +258,8 @@
   }
 
   .homepage-content {
+    position: relative;
+    z-index: 1;
     max-width: 100%;
   }
 
@@ -192,6 +296,22 @@
     transform: translateY(35px);
   }
 
+  /* Nuvole più piccole e posizionate nella homepage-content */
+  .homepage-cloud {
+    width: 250px;
+  }
+
+  .homepage-cloud-left {
+    top: -25px;
+    left: -10%;
+  }
+
+  .homepage-cloud-right {
+    top: auto;
+    right: -10%;
+    bottom: -35px;
+  }
+
   .gift-section {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
@@ -209,9 +329,24 @@
   .gift-content h2 {
     font-size: clamp(2rem, 8vw, 3rem);
   }
+
+  /* Balloon su smartphone */
+  .reviews-balloon {
+    width: 125px;
+  }
+
+  .reviews-balloon-left {
+    top: 2%;
+    left: -10px;
+  }
+
+  .reviews-balloon-right {
+    right: -10px;
+    bottom: 2%;
+  }
 }
 
-/* Smartphone */
+/* Smartphone piccoli */
 @media (max-width: 380px) {
   .homepage {
     gap: 24px;
@@ -229,6 +364,10 @@
   .product-placeholder {
     font-size: 20px;
     transform: translateY(25px);
+  }
+
+  .homepage-cloud {
+    width: 190px;
   }
 
   .gift-section {
@@ -250,5 +389,9 @@
 
   .gift-description {
     font-size: 0.92rem;
+  }
+
+  .reviews-balloon {
+    width: 110px;
   }
 }

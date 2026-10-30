@@ -1,11 +1,15 @@
 .reviews-section {
+  position: relative;
+  z-index: 2;
   padding: 72px 8%;
-  background-color: #f8f6f1;
+  background-color: transparent;
   color: #252421;
   border-top: 1px solid #dedad2;
 }
 
 .reviews-heading {
+  position: relative;
+  z-index: 2;
   max-width: 700px;
   margin: 0 auto 40px;
   text-align: center;
@@ -34,6 +38,8 @@
 }
 
 .reviews-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
