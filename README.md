@@ -104,6 +104,8 @@ npm run preview   # mostra in locale la versione di produzione
 - Più prodotti e una pagina catalogo
 - Test automatici
 
+## 🌐 Demo: https://roma-daje.vercel.app
+
 ## 👩‍💻 Autrice
 
 **Claudia Sgalippa** — Junior Web Developer
