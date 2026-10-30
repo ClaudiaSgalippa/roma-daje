@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Mountain, Landmark, Ruler, House, ChevronDown, Truck, PackageCheck, ShieldCheck, MapPin, Sparkles, Gift } from 'lucide-react'
-
 import { sampietrinoVariants } from '../data/products'
 import { useCart } from '../context/CartContext'
 import './ProductPage.css'
@@ -133,7 +132,7 @@ function ProductPage() {
   }
 
   return (
-    <main className="product-page">
+    <div className="product-page">
       {/* Dettagli principali del prodotto */}
       <section className="product-detail" data-reveal>
         <div
@@ -449,7 +448,7 @@ function ProductPage() {
           })}
         </div>
       </section>
-    </main>
+    </div>
   )
 }
 

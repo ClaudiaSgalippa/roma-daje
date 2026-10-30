@@ -45,7 +45,7 @@ function CartPage() {
   }
 
   return (
-    <main className="cart-page">
+    <div className="cart-page">
       <h1>IL TUO CARRELLO</h1>
 
       {cartItems.length === 0 ? (
@@ -193,7 +193,7 @@ function CartPage() {
           </aside>
         </div>
       )}
-    </main>
+    </div>
   )
 }
 
