@@ -1,8 +1,32 @@
+import { useEffect } from 'react'
 import './Homepage.css'
 import MyProduct from '../components/MyProduct'
 import MyReviews from '../components/MyReviews'
 
 function Homepage() {
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]')
+
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    )
+
+    elements.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <section className="homepage">
@@ -69,11 +93,14 @@ function Homepage() {
         </div>
       </section>
 
-      <MyProduct />
+      <div data-reveal>
+        <MyProduct />
+      </div>
 
       <section
         className="gift-section"
         aria-labelledby="gift-title"
+        data-reveal
       >
         <div className="gift-image">
           <img
@@ -103,7 +130,7 @@ function Homepage() {
         </div>
       </section>
 
-      <section className="homepage-reviews">
+      <section className="homepage-reviews" data-reveal>
 
         {/* Balloon decorativo a sinistra */}
         <div
