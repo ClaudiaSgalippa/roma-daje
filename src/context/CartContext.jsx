@@ -24,7 +24,11 @@ export function CartProvider({ children }) {
   })
 
   useEffect(() => {
-    localStorage.setItem('roma-daje-cart', JSON.stringify(cartItems))
+    try {
+      localStorage.setItem('roma-daje-cart', JSON.stringify(cartItems))
+    } catch {
+      // Il carrello continua a funzionare anche senza salvataggio
+    }
   }, [cartItems])
 
   function addToCart(product, quantity = 1) {
